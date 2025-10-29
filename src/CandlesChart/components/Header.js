@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
 import Konva from 'konva';
-import { Layer, Group, Rect } from './konva';
+import React, { useState } from 'react';
 import useContext from '../modules/useContext';
-import Text from './Text';
 import AngleDown from './AngleDown';
 import HeaderToolbar from './HeaderToolbar';
+import { Group, Layer, Rect } from './konva';
+import Text from './Text';
 
 function Header({ onTimeframeChange, onSymbolClick }) {
   const { frame, config, setCursor } = useContext();

@@ -1,7 +1,6 @@
-import React from 'react';
+import { Div, Text } from '@streamlinedfi/div';
 import uniq from 'lodash/uniq';
-import Div from '../../../Div';
-import Text from '../../../Text';
+import React from 'react';
 
 export default function FieldColor({
   label = 'Color',

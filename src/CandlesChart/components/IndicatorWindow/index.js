@@ -1,12 +1,11 @@
-import React from 'react';
 import { scaleLinear } from 'd3-scale';
+import React from 'react';
+import useContext from '../../modules/useContext';
+import { domainMapping, IndicatorContext, seriesMapping } from './_module';
 import Axes from './Axes';
 import Chart from './Chart';
-import InfoWindow from './InfoWindow';
-import BacktestsWindow from './BacktestsWindow';
 import CrosshairYTick from './CrosshairYTick';
-import useContext from '../../modules/useContext';
-import { domainMapping, seriesMapping, IndicatorContext } from './_module';
+import InfoWindow from './InfoWindow';
 
 export default function IndicatorWindow({
   indicator,
@@ -46,9 +45,6 @@ export default function IndicatorWindow({
         <Axes />
         <Chart />
         <InfoWindow />
-        {!!config.backtests?.length && indicator.indicator === 'MACD' && (
-          <BacktestsWindow />
-        )}
         <CrosshairYTick />
       </IndicatorContext.Provider>
     );

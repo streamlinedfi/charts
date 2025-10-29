@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
 import deepmerge from 'deepmerge';
+import { useEffect, useState } from 'react';
 import defaultConfig from './defaultConfig';
-import removeNilDeep from '../../../modules/removeNilDeep';
+import removeNilDeep from './removeNilDeep';
 
 const { stringify: jstr } = JSON;
 

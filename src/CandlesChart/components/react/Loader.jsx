@@ -1,7 +1,6 @@
-import React from 'react'
-import { css, keyframes } from 'styled-components'
-import Div from './Div'
-import Text from './Text'
+import { Div, Text } from '@streamlinedfi/div';
+import React from 'react';
+import { css, keyframes } from 'styled-components';
 
 const load = keyframes`
   0% {
@@ -11,7 +10,7 @@ const load = keyframes`
   100% {
     transform: translate3d(100%, 0, 0);
   }
-`
+`;
 
 export default function Loader({
   text,
@@ -46,7 +45,7 @@ export default function Loader({
           $h={2}
           $overflow="hidden"
           $radius={2}
-          $background={(theme) => theme.fill300}
+          $background={theme => theme.fill300}
         >
           <Div
             $absolute
@@ -55,12 +54,18 @@ export default function Loader({
             $w={66}
             $h={2}
             $radius={2}
-            $background={(theme) => theme.primary}
+            $background={theme => theme.primary}
             $transform={`translateX(${-100 + progress * 100}%)`}
           />
         </Div>
       ) : (
-        <Div $relative $w={small ? 18 : 22} $h={2} $overflow="hidden" $radius={2}>
+        <Div
+          $relative
+          $w={small ? 18 : 22}
+          $h={2}
+          $overflow="hidden"
+          $radius={2}
+        >
           <Div
             $absolute
             $top={0}
@@ -68,7 +73,7 @@ export default function Loader({
             $w={small ? 18 : 22}
             $h={2}
             $radius={2}
-            $background={(theme) => theme.primary}
+            $background={theme => theme.primary}
             css={css`
               animation: ${load} 1s ease infinite;
             `}
@@ -76,5 +81,5 @@ export default function Loader({
         </Div>
       )}
     </Div>
-  )
+  );
 }

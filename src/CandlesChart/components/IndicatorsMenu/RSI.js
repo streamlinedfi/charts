@@ -1,5 +1,5 @@
 import React from 'react';
-import arrayReplace from '../../../../modules/shared/arrayReplace';
+import arrayReplace from '../../modules/arrayReplace';
 import FieldColor from './FieldColor';
 import FieldInput from './FieldInput';
 import FieldThickness from './FieldThickness';

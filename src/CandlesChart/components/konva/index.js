@@ -1,13 +1,13 @@
 import React, { forwardRef } from 'react';
 import {
-  Stage as KonvaStage,
-  Layer as KonvaLayer,
-  Group as KonvaGroup,
-  Rect as KonvaRect,
   Circle as KonvaCircle,
-  Text as KonvaText,
-  Line as KonvaLine,
+  Group as KonvaGroup,
   Image as KonvaImage,
+  Layer as KonvaLayer,
+  Line as KonvaLine,
+  Rect as KonvaRect,
+  Stage as KonvaStage,
+  Text as KonvaText,
 } from 'react-konva';
 
 // preventDefault to allow scrolling on mobile (touch)

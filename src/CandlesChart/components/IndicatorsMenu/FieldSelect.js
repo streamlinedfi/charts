@@ -1,8 +1,7 @@
-import React from 'react';
-import Div from '../../../Div';
-import Text from '../../../Text';
-import Button from '../../../Button';
+import { Div, Text } from '@streamlinedfi/div';
 import { tint } from 'polished';
+import React from 'react';
+import Button from '../react/Button';
 
 export default function FieldSelect({
   label = 'Select',

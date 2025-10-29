@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Html } from 'react-konva-utils';
 import { ThemeProvider } from 'styled-components';
-import { Layer } from './konva';
-import Popover from '../../Popover';
-import MenuItem from '../../Header/MenuItem';
-import Separator from '../../Separator';
-import useContext from '../modules/useContext';
 import theme from '../../../modules/shared/theme';
+import useContext from '../modules/useContext';
+import { Layer } from './konva';
+import MenuItem from './react/MenuItem';
+import Popover from './react/Popover';
+import Separator from './react/Separator';
 
 function Menu() {
   const { dispatch } = useContext();

@@ -1,28 +1,29 @@
-import { ErrorMessage, Field } from 'formik'
-import { tint, transparentize } from 'polished'
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
-import theme from '../modules/shared/theme'
-import Div, { divMixin, pixelate } from './Div'
+import { Div } from '@streamlinedfi/div';
+import { ErrorMessage, Field } from 'formik';
+import { tint, transparentize } from 'polished';
+import React, { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
+import theme from '../modules/shared/theme';
+import { divMixin, pixelate } from './Div';
 
-const inputBackground = tint(0.02, theme.background)
-const inputBackgroundHover = tint(0.03, theme.background)
-const inputBackgroundDarker = tint(0.02, theme.backgroundDarker)
-const inputBackgroundDarkerHover = tint(0.03, theme.backgroundDarker)
+const inputBackground = tint(0.02, theme.background);
+const inputBackgroundHover = tint(0.03, theme.background);
+const inputBackgroundDarker = tint(0.02, theme.backgroundDarker);
+const inputBackgroundDarkerHover = tint(0.03, theme.backgroundDarker);
 
 export const Label = styled.label`
   position: absolute;
   z-index: 1;
-  top: ${(props) => props.theme.spacing(0.75)};
-  left: ${(props) => props.theme.spacing(0.5)};
-  padding: 0 ${(props) => props.theme.spacing(0.5)};
-  color: ${(props) => props.theme.fill500};
-  margin-bottom: ${(props) => props.theme.spacing(0.25)};
+  top: ${props => props.theme.spacing(0.75)};
+  left: ${props => props.theme.spacing(0.5)};
+  padding: 0 ${props => props.theme.spacing(0.5)};
+  color: ${props => props.theme.fill500};
+  margin-bottom: ${props => props.theme.spacing(0.25)};
   transition: all 0.2s;
   transform-origin: bottom left;
   pointer-events: none;
   font-weight: 500;
-`
+`;
 
 const LabelBg = styled.div`
   position: absolute;
@@ -31,48 +32,57 @@ const LabelBg = styled.div`
   height: 3px;
   left: 4px;
   right: 4px;
-  background: ${(props) => inputBackground};
-`
+  background: ${props => inputBackground};
+`;
 
 export const HeaderLabel = styled.label`
   width: 100%;
   display: block;
   margin-bottom: 6px;
   font-weight: 500;
-  color: ${(props) => props.theme.fill500};
+  color: ${props => props.theme.fill500};
   white-space: nowrap;
 
-  ${(props) =>
+  ${props =>
     props.columns &&
     css`
       flex-shrink: 0;
       line-height: 46px;
       margin-bottom: 0;
 
-      ${Array.isArray(props.columns) ? `width: ${pixelate(props.columns[0])};` : `width: 188px;`}
+      ${Array.isArray(props.columns)
+        ? `width: ${pixelate(props.columns[0])};`
+        : `width: 188px;`}
     `}
-`
+`;
 
 export const StyledField = styled(({ useFormik, ...props }) =>
-  useFormik ? <Field {...props} /> : <input {...props} />
+  useFormik ? <Field {...props} /> : <input {...props} />,
 )`
   width: 100%;
   border-radius: 8px;
-  border: 1px solid ${(props) => (props.darker ? inputBackgroundDarker : inputBackground)};
-  background-color: ${(props) => (props.darker ? inputBackgroundDarker : inputBackground)};
+  border: 1px solid
+    ${props => (props.darker ? inputBackgroundDarker : inputBackground)};
+  background-color: ${props =>
+    props.darker ? inputBackgroundDarker : inputBackground};
   box-shadow: inset 0 0 0 1px transparent;
-  padding: ${(props) => props.theme.spacing(0.75)} ${(props) => props.theme.spacing(1)};
+  padding: ${props => props.theme.spacing(0.75)}
+    ${props => props.theme.spacing(1)};
   outline: 0;
   line-height: 20px;
   font-weight: 500;
   transition: all 0.2s;
-  color: ${(props) => props.theme.fill700};
+  color: ${props => props.theme.fill700};
 
-  ${(props) =>
+  ${props =>
     props.value
       ? css`
-          border-color: ${props.darker ? inputBackgroundDarker : inputBackground};
-          background-color: ${props.darker ? inputBackgroundDarker : inputBackground};
+          border-color: ${props.darker
+            ? inputBackgroundDarker
+            : inputBackground};
+          background-color: ${props.darker
+            ? inputBackgroundDarker
+            : inputBackground};
 
           ~ ${Label} {
             transform: translate(1px, -23px) scale(0.92857);
@@ -81,24 +91,32 @@ export const StyledField = styled(({ useFormik, ...props }) =>
         `
       : css`
           &:not([readonly]):not(:focus):hover {
-            border-color: ${props.darker ? inputBackgroundDarkerHover : inputBackgroundHover};
-            background-color: ${props.darker ? inputBackgroundDarkerHover : inputBackgroundHover};
+            border-color: ${props.darker
+              ? inputBackgroundDarkerHover
+              : inputBackgroundHover};
+            background-color: ${props.darker
+              ? inputBackgroundDarkerHover
+              : inputBackgroundHover};
 
             ~ ${Label} {
-              background-color: ${props.darker ? inputBackgroundDarkerHover : inputBackgroundHover};
+              background-color: ${props.darker
+                ? inputBackgroundDarkerHover
+                : inputBackgroundHover};
             }
           }
         `}
 
   &.is-focused,
   &:not([readonly]):focus {
-    border-color: ${(props) => props.theme.primary};
-    box-shadow: inset 0 0 0 1px ${(props) => transparentize(0.5, props.theme.primary)};
-    background-color: ${(props) => (props.darker ? inputBackgroundDarker : inputBackground)};
+    border-color: ${props => props.theme.primary};
+    box-shadow: inset 0 0 0 1px
+      ${props => transparentize(0.5, props.theme.primary)};
+    background-color: ${props =>
+      props.darker ? inputBackgroundDarker : inputBackground};
 
     ~ ${Label} {
       transform: translate(1px, -23px) scale(0.92857);
-      color: ${(props) => props.theme.primary};
+      color: ${props => props.theme.primary};
       opacity: 1;
     }
   }
@@ -108,19 +126,19 @@ export const StyledField = styled(({ useFormik, ...props }) =>
     cursor: not-allowed;
   }
 
-  ${(props) => props.css};
-  ${(props) => divMixin(props)};
-`
+  ${props => props.css};
+  ${props => divMixin(props)};
+`;
 
 export const StyledErrorMessage = styled.div`
   margin-top: 2px;
   font-size: 13px;
   font-weight: 500;
-  color: ${(props) => props.theme.error};
+  color: ${props => props.theme.error};
   text-align: left;
-  padding: 0 ${(props) => props.theme.spacing(0.5)};
-  ${(props) => props.css};
-`
+  padding: 0 ${props => props.theme.spacing(0.5)};
+  ${props => props.css};
+`;
 
 const Input = React.forwardRef((props, ref) => {
   const {
@@ -145,31 +163,31 @@ const Input = React.forwardRef((props, ref) => {
     autofocus,
     columns,
     ...allRest
-  } = props
+  } = props;
 
   const { rest, wrapperDivProps } = Object.entries(allRest).reduce(
     (next, [key, val]) => {
       /* eslint-disable no-param-reassign */
       if (key.startsWith('$')) {
-        next.wrapperDivProps[key.slice(1)] = val === 0 ? '0' : val
+        next.wrapperDivProps[key.slice(1)] = val === 0 ? '0' : val;
       } else {
-        next.rest[key] = val
+        next.rest[key] = val;
       }
-      return next
+      return next;
     },
     {
       rest: {},
-      wrapperDivProps: {}
-    }
-  )
+      wrapperDivProps: {},
+    },
+  );
 
-  const [isTouched, setIsTouched] = useState(false)
+  const [isTouched, setIsTouched] = useState(false);
 
   useEffect(() => {
     if (!isTouched && value) {
-      setIsTouched(true)
+      setIsTouched(true);
     }
-  }, [isTouched, value])
+  }, [isTouched, value]);
 
   return (
     <Div
@@ -190,19 +208,23 @@ const Input = React.forwardRef((props, ref) => {
       )}
       <Div
         $w={
-          columns ? (Array.isArray(columns) ? pixelate(columns[1]) : `calc(100% - 188px)`) : '100%'
+          columns
+            ? Array.isArray(columns)
+              ? pixelate(columns[1])
+              : `calc(100% - 188px)`
+            : '100%'
         }
       >
         <StyledField
           as={as}
           id={id || name}
           name={name}
-          ref={(rf) => {
+          ref={rf => {
             if (autofocus && rf) {
-              rf.focus()
+              rf.focus();
             }
             if (ref) {
-              ref.current = rf
+              ref.current = rf;
             }
           }}
           css={inputCss}
@@ -226,13 +248,19 @@ const Input = React.forwardRef((props, ref) => {
         {((withError && useFormik) || errorMsg) && (
           <>
             {errorMsg ? (
-              <StyledErrorMessage css={messageCss} data-test-id={`${id || name}-error`}>
+              <StyledErrorMessage
+                css={messageCss}
+                data-test-id={`${id || name}-error`}
+              >
                 {errorMsg}
               </StyledErrorMessage>
             ) : (
               <ErrorMessage name={name}>
-                {(msg) => (
-                  <StyledErrorMessage css={messageCss} data-test-id={`${id || name}-error`}>
+                {msg => (
+                  <StyledErrorMessage
+                    css={messageCss}
+                    data-test-id={`${id || name}-error`}
+                  >
                     {msg}
                   </StyledErrorMessage>
                 )}
@@ -243,7 +271,7 @@ const Input = React.forwardRef((props, ref) => {
         {renderFooter}
       </Div>
     </Div>
-  )
-})
+  );
+});
 
-export default Input
+export default Input;

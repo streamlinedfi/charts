@@ -1,10 +1,10 @@
 import React from 'react';
-import Indicator from './Indicator';
+import arrayReplace from '../../modules/arrayReplace';
+import FieldColor from './FieldColor';
 import FieldInput from './FieldInput';
 import FieldSelect from './FieldSelect';
-import FieldColor from './FieldColor';
 import FieldThickness from './FieldThickness';
-import arrayReplace from '../../../../modules/shared/arrayReplace';
+import Indicator from './Indicator';
 
 export default function MovingAverage({ context }) {
   const { config, setConfig } = context;

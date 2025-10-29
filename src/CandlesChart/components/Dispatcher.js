@@ -1,10 +1,10 @@
+import Div from '@streamlinedfi/div';
 import React, { memo, useRef, useState } from 'react';
 import { Html } from 'react-konva-utils';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import isEqualProps from '../../../modules/isEqualProps';
 import theme from '../../../modules/shared/theme';
-import Div from '../../Div';
+import isEqualProps from '../modules/isEqualProps';
 import {
   useOnLoadMore,
   useXScaleDispatch,

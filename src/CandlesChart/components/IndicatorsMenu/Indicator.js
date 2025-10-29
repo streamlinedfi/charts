@@ -1,10 +1,9 @@
-import React from 'react';
+import { Div, Text } from '@streamlinedfi/div';
 import { ChevronLeft } from '@styled-icons/octicons/ChevronLeft';
-import Div from '../../../Div';
-import Switch from '../../../Switch';
-import Text from '../../../Text';
+import React from 'react';
+import arrayReplace from '../../modules/arrayReplace';
 import { Screens, defaultConfigs } from '../../modules/indicators';
-import arrayReplace from '../../../../modules/shared/arrayReplace';
+import Switch from '../react/Switch';
 
 export default function Indicator({
   context,

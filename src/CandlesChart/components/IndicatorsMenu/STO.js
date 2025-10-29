@@ -1,9 +1,7 @@
 import React from 'react';
-import Indicator from './Indicator';
+import arrayReplace from '../../modules/arrayReplace';
 import FieldInput from './FieldInput';
-import FieldColor from './FieldColor';
-import FieldThickness from './FieldThickness';
-import arrayReplace from '../../../../modules/shared/arrayReplace';
+import Indicator from './Indicator';
 
 export default function STO({ context }) {
   const { config, setConfig } = context;

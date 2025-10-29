@@ -1,9 +1,8 @@
+import Div from '@streamlinedfi/div';
 import React from 'react';
 import { createPortal } from 'react-dom';
-import theme from '../../../../modules/shared/theme';
-import Div from '../../../Div';
-import Popover from '../../../Popover';
 import { Screens } from '../../modules/indicators';
+import Popover from '../react/Popover';
 import ATR from './ATR';
 import BB from './BB';
 import Indicators from './Indicators';
@@ -14,7 +13,6 @@ import RSI from './RSI';
 import STO from './STO';
 
 const screenComponentMapping = {
-  // [Screens.Datawindow]: Datawindow,
   [Screens.Indicators]: Indicators,
   [Screens.MA]: MovingAverage,
   [Screens.RSI]: RSI,
@@ -33,7 +31,7 @@ export default function IndicatorsPopover({
   context,
   onOutsideClick,
 }) {
-  const { config, setConfig, frame } = context;
+  const { config } = context;
 
   const Screen =
     screenComponentMapping[
@@ -43,7 +41,12 @@ export default function IndicatorsPopover({
   return (
     typeof window !== 'undefined' &&
     createPortal(
-      <Div $fixed $cover $z={theme.zIndices.modal - 1} onClick={onOutsideClick}>
+      <Div
+        $fixed
+        $cover
+        $z={theme => theme.zIndices.modal - 1}
+        onClick={onOutsideClick}
+      >
         <Div
           ref={floating}
           style={{

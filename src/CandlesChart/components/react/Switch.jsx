@@ -1,6 +1,6 @@
-import { transparentize } from 'polished'
-import React from 'react'
-import Div from './Div'
+import Div from '@streamlinedfi/div';
+import { transparentize } from 'polished';
+import React from 'react';
 
 export default function Switch({
   active,
@@ -8,7 +8,7 @@ export default function Switch({
   outerWidth = 44,
   outerHeight = 30,
   innerSize = 24,
-  innerMargin = 3
+  innerMargin = 3,
 }) {
   return (
     <Div
@@ -17,7 +17,9 @@ export default function Switch({
       $w={outerWidth}
       $radius={21}
       $h={outerHeight}
-      $background={(theme) => (active ? transparentize(0.25, theme.primary) : theme.fill300)}
+      $background={theme =>
+        active ? transparentize(0.25, theme.primary) : theme.fill300
+      }
       onClick={() => setActive(!active)}
     >
       <Div
@@ -29,8 +31,8 @@ export default function Switch({
         $w={innerSize}
         $h={innerSize}
         $radius="50%"
-        $background={(theme) => (active ? theme.fill800 : theme.fill600)}
+        $background={theme => (active ? theme.fill800 : theme.fill600)}
       />
     </Div>
-  )
+  );
 }

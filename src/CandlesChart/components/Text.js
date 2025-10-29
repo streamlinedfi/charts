@@ -1,7 +1,7 @@
-import React, { forwardRef, useRef, useEffect } from 'react';
-import { Text as KonvaText, Rect } from './konva';
+import React, { forwardRef, useRef } from 'react';
+import removeNilDeep from '../modules/removeNilDeep';
 import useContext from '../modules/useContext';
-import removeNilDeep from '../../../modules/removeNilDeep';
+import { Text as KonvaText, Rect } from './konva';
 
 function Text({ getWidth, ...props }, parentRef) {
   const textRef = useRef();

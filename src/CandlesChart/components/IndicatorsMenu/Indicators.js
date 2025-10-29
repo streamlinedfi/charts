@@ -1,17 +1,16 @@
+import { Div, Text } from '@streamlinedfi/div';
 import { Plus as PlusIcon } from '@styled-icons/evaicons-solid/Plus';
 import sortBy from 'lodash/sortBy';
 import React, { useState } from 'react';
-import arrayReplace from '../../../../modules/shared/arrayReplace';
-import Div from '../../../Div';
-import DragList, { DragListItem } from '../../../DragList';
-import PopoverMenu from '../../../PopoverMenu';
-import Separator from '../../../Separator';
-import Switch from '../../../Switch';
-import Text from '../../../Text';
+import arrayReplace from '../../modules/arrayReplace';
 import {
   Indicators,
   defaultConfigs as defaultIndicatorConfigs,
 } from '../../modules/indicators';
+import DragList, { DragListItem } from '../react/DragList';
+import PopoverMenu from '../react/PopoverMenu';
+import Separator from '../react/Separator';
+import Switch from '../react/Switch';
 
 const indicatorTextMapping = {
   [Indicators.RSI]: 'RSI',

@@ -1,7 +1,7 @@
 import React from 'react';
-import Indicator from './Indicator';
+import arrayReplace from '../../modules/arrayReplace';
 import FieldInput from './FieldInput';
-import arrayReplace from '../../../../modules/shared/arrayReplace';
+import Indicator from './Indicator';
 
 export default function BB({ context }) {
   const { config, setConfig } = context;

@@ -1,7 +1,6 @@
+import { Div, Text } from '@streamlinedfi/div';
 import React from 'react';
-import Div from '../../../Div';
-import Text from '../../../Text';
-import Input from '../../../Input';
+import Input from '../react/Input';
 
 export default function FieldInput({ label, value, setValue }) {
   return (

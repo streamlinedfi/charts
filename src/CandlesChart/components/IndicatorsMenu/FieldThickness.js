@@ -1,8 +1,7 @@
+import { Div, Text } from '@streamlinedfi/div';
+import { tint } from 'polished';
 import React from 'react';
-import Div from '../../../Div';
-import Text from '../../../Text';
-import Button from '../../../Button';
-import { transparentize, tint } from 'polished';
+import Button from '../react/Button';
 
 export default function FieldInput({ label = 'Thickness', value, setValue }) {
   return (

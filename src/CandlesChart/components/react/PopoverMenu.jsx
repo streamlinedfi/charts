@@ -1,10 +1,8 @@
-import NextLink from 'next/link'
-import React from 'react'
-import Div from './Div'
-import MenuItem from './MenuItem'
-import Popover from './Popover'
-import Separator from './Separator'
-import Text from './Text'
+import { Div, Text } from '@streamlinedfi/div';
+import React from 'react';
+import MenuItem from './MenuItem';
+import Popover from './Popover';
+import Separator from './Separator';
 
 /**
  * items: [{
@@ -37,7 +35,7 @@ export default function PopoverMenu({
       yOffset={yOffset}
       onOutsideClick={() => setShow(false)}
       $py={0.75}
-      $color={(theme) => theme.fill700}
+      $color={theme => theme.fill700}
       showAngle={showAngle}
       $textAlign="left"
       {...props}
@@ -50,56 +48,56 @@ export default function PopoverMenu({
               $py={0.375}
               $px={1.25}
               $mx={0.5}
-              $color$hover={(theme) => theme.fill900}
+              $color$hover={theme => theme.fill900}
             >
               <Text $size={12} $weight={600} $color={500} $uppercase>
                 {item.props.text}
               </Text>
             </Div>
-          )
+          );
         }
 
         if (/item/i.test(item.type)) {
           if (item.props.href || item.href) {
             return (
               <MenuItem
-                as={NextLink}
+                as="a"
                 prefetch={false}
                 key={item.key || item.props.text || i}
                 href={item.props.href || item.href}
                 {...item.props}
-                onClick={(e) => {
-                  setShow(false)
+                onClick={e => {
+                  setShow(false);
                   if (item.props.onClick) {
-                    item.props.onClick(e)
+                    item.props.onClick(e);
                   }
                 }}
               >
                 {item.props.text}
               </MenuItem>
-            )
+            );
           }
           return (
             <MenuItem
               key={item.key || item.props.text || i}
               href={item.props.href}
               {...item.props}
-              onClick={(e) => {
-                setShow(false)
+              onClick={e => {
+                setShow(false);
                 if (item.props.onClick) {
-                  item.props.onClick(e)
+                  item.props.onClick(e);
                 }
               }}
             >
               {item.props.text}
             </MenuItem>
-          )
+          );
         }
 
         if (/separator/i.test(item.type)) {
-          return <Separator key={i} $my={0.5} />
+          return <Separator key={i} $my={0.5} />;
         }
       })}
     </Popover>
-  )
+  );
 }

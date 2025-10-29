@@ -1,6 +1,6 @@
 import Konva from 'konva';
+import round from 'lodash/round';
 import { transparentize } from 'polished';
-import round from '../../../modules/shared/round';
 import { Indicators } from '../modules/indicators';
 
 const textMapping = {

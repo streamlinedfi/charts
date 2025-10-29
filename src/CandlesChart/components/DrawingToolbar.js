@@ -1,17 +1,17 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Html } from 'react-konva-utils';
+import Div from '@streamlinedfi/div';
 import { transparentize } from 'polished';
-import Aa from '../assets/Aa.svg';
-import Line from '../assets/line.svg';
-import Rect from '../assets/rect.svg';
-import HArea from '../assets/harea.svg';
-import HLine from '../assets/hline.svg';
-import VLine from '../assets/vline.svg';
-import Text from '../assets/text.svg';
-import Div from '../../Div';
-import useContext from '../modules/useContext';
+import React from 'react';
+import { Html } from 'react-konva-utils';
 import theme from '../../../modules/shared/theme';
 import Close from '../../Close';
+import Aa from '../assets/Aa.svg';
+import HArea from '../assets/harea.svg';
+import HLine from '../assets/hline.svg';
+import Line from '../assets/line.svg';
+import Rect from '../assets/rect.svg';
+import Text from '../assets/text.svg';
+import VLine from '../assets/vline.svg';
+import useContext from '../modules/useContext';
 
 const scaleMapping = {
   small: 0.85,

@@ -1,11 +1,11 @@
-import React from 'react';
 import { transparentize } from 'polished';
+import React from 'react';
 import { Html } from 'react-konva-utils';
 import { ThemeProvider } from 'styled-components';
-import { Layer } from './konva';
-import LoaderComponent from '../../Loader';
-import useContext from '../modules/useContext';
 import theme from '../../../modules/shared/theme';
+import useContext from '../modules/useContext';
+import { Layer } from './konva';
+import LoaderComponent from './react/Loader';
 
 function Loader({ loading }) {
   const { frame, config } = useContext();
