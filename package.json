@@ -1,0 +1,28 @@
+{
+  "name": "@streamlinedfi/charts",
+  "version": "0.1.0",
+  "description": "Charting Library with Financial Candlesticks Chart that provides an alternative to TradingView",
+  "author": "Streamlined Finance",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streamlinedfi/charts.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streamlinedfi/charts/issues"
+  },
+  "homepage": "https://github.com/streamlinedfi/charts#readme",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  }
+}

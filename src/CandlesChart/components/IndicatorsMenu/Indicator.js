@@ -1,0 +1,95 @@
+import React from 'react';
+import { ChevronLeft } from '@styled-icons/octicons/ChevronLeft';
+import Div from '../../../Div';
+import Switch from '../../../Switch';
+import Text from '../../../Text';
+import { Screens, defaultConfigs } from '../../modules/indicators';
+import arrayReplace from '../../../../modules/shared/arrayReplace';
+
+export default function Indicator({
+  context,
+  indicator,
+  children,
+  preSettingsChildren,
+}) {
+  const { config, setConfig } = context;
+  const [key, i] = config.indicators.currentScreenMeta;
+
+  const setValue = (k, v) =>
+    setConfig({
+      ...config,
+      indicators: {
+        ...config.indicators,
+        [key]: arrayReplace(config.indicators[key], i, ic => ({
+          ...ic,
+          [k]: v,
+        })),
+      },
+    });
+
+  return (
+    <Div $pt={1.25} $flex $col $h="100%">
+      <Div
+        as="button"
+        $px={1}
+        $flex
+        $mb={1.25}
+        onClick={() =>
+          setConfig({
+            ...config,
+            indicators: {
+              ...config.indicators,
+              currentScreen: Screens.Indicators,
+            },
+          })
+        }
+      >
+        <Div as={ChevronLeft} $w={16} $color={theme => theme.blue800} />
+        <Text $size={13} $lineH={16} $color={theme => theme.blue800}>
+          Indicators
+        </Text>
+      </Div>
+      <Div $px={1.25} $flex $spaceBetween>
+        <Text $size={16} $lineH={30} $weight={600} $color={800} $mb={1.375}>
+          {indicator.indicator}
+        </Text>
+        <Switch
+          active={indicator.active}
+          setActive={active => setValue('active', active)}
+        />
+      </Div>
+      <Div $w="100%" $outerCenter $overflowY="scroll" $maxH={360}>
+        {preSettingsChildren}
+        <Div $flex $spaceBetween $mb={0.5}>
+          <Text $px={1.25} $size={13} $color={500}>
+            Settings
+          </Text>
+          <Text
+            as="button"
+            $px={1.25}
+            $size={13}
+            $color={500}
+            onClick={() => {
+              const { active, ...defaults } = defaultConfigs[
+                indicator.indicator
+              ];
+              setConfig({
+                ...config,
+                indicators: {
+                  ...config.indicators,
+                  [key]: arrayReplace(config.indicators[key], i, ic => ({
+                    ...ic,
+                    ...defaults,
+                  })),
+                },
+              });
+            }}
+          >
+            Reset Defaults
+          </Text>
+        </Div>
+        {children}
+      </Div>
+    </Div>
+  );
+}
