@@ -60,6 +60,7 @@ function Chart({
     [],
   );
   const [config, setConfig] = useConfig(instanceConfig);
+  console.log('TCL: config', config);
   const data = useData(
     instanceData,
     config.initialCandlesWindow,
@@ -83,11 +84,11 @@ function Chart({
     }
   }, [jstr(config)]);
 
-  useEffect(() => {
-    dispatch.on('rerender', () => {
-      setRerenderCount(prev => prev + 1);
-    });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch.on('rerender', () => {
+  //     setRerenderCount(prev => prev + 1);
+  //   });
+  // }, [dispatch]);
 
   useEffect(() => {
     // create container if it doesn't exist

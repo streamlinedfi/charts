@@ -35,7 +35,7 @@ function renderIndicatorWindowInfo({
     fontStyle: config.theme.fontStyle,
     fontSize: config.theme.axes.fontSize,
     text: textMapping[indicator.indicator] || indicator.indicator,
-    fill: config.theme.theme.fill600,
+    fill: config.theme.indicatorWindow.color,
     x: indicatorFrame.xStart,
     y: indicatorFrame.yStart + 16,
     offsetY: config.theme.axes.fontSize / 2,
@@ -47,7 +47,7 @@ function renderIndicatorWindowInfo({
   const settingsAttrs = {
     ...indicatorAttrs,
     text: settingsMapping[indicator.indicator](indicator),
-    fill: config.theme.theme.fill500,
+    fill: config.theme.indicatorWindow.settingsColor,
     x: indicatorAttrs.x + indicatorTextWidth + 8,
   };
   const settingsTextWidth = new Konva.Text(settingsAttrs).getTextWidth();
@@ -60,7 +60,7 @@ function renderIndicatorWindowInfo({
         y: indicatorFrame.yStart + 16 - config.theme.fontSize / 2,
         width: indicatorTextWidth + settingsTextWidth + 8,
         height: config.theme.fontSize,
-        fill: transparentize(0.25, config.theme.theme.background),
+        fill: transparentize(0.25, config.theme.indicatorWindow.bgColor),
         cornerRadius: [0, 8, 8, 0],
       },
     },

@@ -10,8 +10,7 @@ export const StyledField = styled.input`
   border: 1px solid ${props => props.bgColor};
   background-color: ${props => props.bgColor};
   box-shadow: inset 0 0 0 1px transparent;
-  padding: ${props => props.theme.spacing(0.75)}
-    ${props => props.theme.spacing(1)};
+  padding: 12px 16px;
   outline: 0;
   line-height: 20px;
   font-weight: 500;

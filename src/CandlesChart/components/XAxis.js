@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { Layer } from './konva';
 import forEach from 'lodash/forEach';
 import inRange from 'lodash/inRange';
+import React, { useEffect, useRef } from 'react';
 import useContext from '../modules/useContext';
 import useRenderer from '../modules/useRenderer';
 import useScales from '../modules/useScales';
+import { Layer } from './konva';
 
 const jstr = JSON.stringify;
 
@@ -31,7 +31,9 @@ function renderTick({ frame, config, value, x, emphasize }) {
         fontFamily: config.theme.fontFamily,
         fontStyle: emphasize ? 600 : config.theme.fontStyle,
         fontSize: config.theme.axes.fontSize,
-        fill: emphasize ? config.theme.theme.fill600 : config.theme.axes.color,
+        fill: emphasize
+          ? config.theme.axes.emphasizeColor
+          : config.theme.axes.color,
         x,
         y:
           frame.xAxis.yStart +

@@ -37,7 +37,7 @@ const renderROC = ({
     {
       type: 'Line',
       attrs: {
-        stroke: config.theme.theme.fill300,
+        stroke: config.theme.indicators.roc.zeroLineColor,
         strokeWidth: 1,
         dash: [3, 4],
         points: [

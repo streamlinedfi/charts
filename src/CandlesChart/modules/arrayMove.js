@@ -1,4 +1,4 @@
-function arrayMove(prevArray, fromIndex, toIndex) {
+export default function arrayMove(prevArray, fromIndex, toIndex) {
   const array = [...prevArray];
 
   const startIndex = fromIndex < 0 ? array.length + fromIndex : fromIndex;
@@ -12,5 +12,3 @@ function arrayMove(prevArray, fromIndex, toIndex) {
 
   return array;
 }
-
-module.exports = arrayMove;

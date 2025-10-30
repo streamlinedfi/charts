@@ -11,7 +11,7 @@ const Separator = styled.hr`
     }
     return props.theme.fill200;
   }};
-  margin: ${props => props.theme.spacing()} 0;
+  margin: 16px 0;
 
   ${props => divMixin(props)};
 `;

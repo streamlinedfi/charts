@@ -1,5 +1,4 @@
 import inRange from 'lodash/inRange';
-import { transparentize } from 'polished';
 
 const renderBB = ({ indicator, config, frame, series, scales }) => {
   const upperPoints = series
@@ -32,7 +31,7 @@ const renderBB = ({ indicator, config, frame, series, scales }) => {
     {
       type: 'Line',
       attrs: {
-        fill: transparentize(0.5, config.theme.theme.backgroundDarkest),
+        fill: config.theme.indicators.bb.bgColor,
         points: [upperPoints, lowerPoints.reverse()].flat(2),
         perfectDrawEnabled: false,
         listening: false,
@@ -42,7 +41,7 @@ const renderBB = ({ indicator, config, frame, series, scales }) => {
     {
       type: 'Line',
       attrs: {
-        stroke: config.theme.theme.red,
+        stroke: config.theme.indicators.bb.upperlineColor,
         strokeWidth: indicator.thickness,
         points: upperPoints,
         perfectDrawEnabled: false,
@@ -52,7 +51,7 @@ const renderBB = ({ indicator, config, frame, series, scales }) => {
     {
       type: 'Line',
       attrs: {
-        stroke: config.theme.theme.blue,
+        stroke: config.theme.indicators.bb.middlelineColor,
         strokeWidth: indicator.thickness,
         points: middlePoints,
         perfectDrawEnabled: false,
@@ -62,7 +61,7 @@ const renderBB = ({ indicator, config, frame, series, scales }) => {
     {
       type: 'Line',
       attrs: {
-        stroke: config.theme.theme.green,
+        stroke: config.theme.indicators.bb.lowerlineColor,
         strokeWidth: indicator.thickness,
         points: lowerPoints.flat(1),
         perfectDrawEnabled: false,

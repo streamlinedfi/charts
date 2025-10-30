@@ -1,0 +1,2 @@
+import"./chunk-AHONOM5Y.mjs";import e,{forwardRef as u,lazy as l,Suspense as n,useEffect as a,useState as p}from"react";var d=l(()=>import("./Chart-ZDK45DGU.mjs")),t=u((r,f)=>{let[o,s]=p(!1);return a(()=>{s(!0)},[]),o?e.createElement(n,{fallback:null},e.createElement(d,{...r,fwdRef:f})):null});var x=t;export{t as CandlesChart,x as default};
+//# sourceMappingURL=index.mjs.map

@@ -1,7 +1,6 @@
 import { Div } from '@streamlinedfi/div';
 import React from 'react';
 import { css, keyframes } from 'styled-components';
-import useContext from '../../modules/useContext';
 
 const load = keyframes`
   0% {
@@ -23,10 +22,9 @@ export default function Loader({
   $height,
   progress,
   small = false,
+  color = '#0094FF',
   ...props
 }) {
-  const { config } = useContext();
-
   return (
     <Div
       $flex
@@ -44,7 +42,7 @@ export default function Loader({
           $w={small ? 18 : 22}
           $h={2}
           $radius={2}
-          $background={config.theme.primary}
+          $background={color}
           css={css`
             animation: ${load} 1s ease infinite;
           `}

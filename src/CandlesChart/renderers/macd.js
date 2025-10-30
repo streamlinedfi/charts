@@ -65,20 +65,20 @@ const renderMACD = ({
 
       let color;
       if (value > 0) {
-        color = config.theme.theme.green;
+        color = config.theme.candleUpColor;
         if (prevValue !== undefined) {
           color =
             value > prevValue
-              ? config.theme.theme.green
-              : transparentize(0.25, config.theme.theme.green);
+              ? config.theme.candleUpColor
+              : transparentize(0.25, config.theme.candleUpColor);
         }
       } else {
-        color = config.theme.theme.red;
+        color = config.theme.candleDownColor;
         if (prevValue !== undefined) {
           color =
             value < prevValue
-              ? config.theme.theme.red
-              : transparentize(0.25, config.theme.theme.red);
+              ? config.theme.candleDownColor
+              : transparentize(0.25, config.theme.candleDownColor);
         }
       }
 

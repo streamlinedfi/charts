@@ -1,4 +1,4 @@
-function arrayReplace(array, findIndex, replacement) {
+export default function arrayReplace(array, findIndex, replacement) {
   if (!array || !Array.isArray(array)) {
     return [];
   }
@@ -20,5 +20,3 @@ function arrayReplace(array, findIndex, replacement) {
 
   return newArray;
 }
-
-module.exports = arrayReplace;

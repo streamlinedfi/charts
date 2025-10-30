@@ -120,6 +120,7 @@ export default {
     axes: {
       fontSize: 13,
       color: theme.fill500,
+      emphasizeColor: theme.fill600,
       lineColor: theme.fill300,
       tickColor: theme.fill300,
       // tickBgColor: mix(0.2, '#1a9fff', theme.backgroundDarker),
@@ -134,6 +135,9 @@ export default {
     indicatorWindow: {
       splitLineColor: theme.fill300,
       splitLineWidth: 2,
+      bgColor: theme.background,
+      color: theme.fill500,
+      settingsColor: theme.fill600,
     },
     crosshair: {
       color: theme.fill800,
@@ -246,6 +250,38 @@ export default {
       color: theme.fill400,
       colorHover: theme.fill900,
       colorActive: theme.fill700,
+    },
+    indicators: {
+      bb: {
+        bgColor: transparentize(0.5, theme.backgroundDarkest),
+        upperlineColor: theme.red,
+        middlelineColor: theme.primary,
+        lowerlineColor: theme.greenCandle,
+      },
+      macd: {
+        bgColor: transparentize(0.5, theme.backgroundDarkest),
+        histogramColor: theme.greenCandle,
+        histogramBgColor: transparentize(0.25, theme.greenCandle),
+        signalLineColor: theme.primary,
+        signalLineBgColor: transparentize(0.25, theme.primary),
+        histogramBarColor: theme.redCandle,
+        histogramBarBgColor: transparentize(0.25, theme.redCandle),
+      },
+      roc: {
+        zeroLineColor: theme.fill300,
+      },
+      rsi: {
+        bgColor: theme.backgroundDarkest,
+        upperLineColor: theme.fill400,
+        lowerLineColor: theme.fill400,
+        middleLineColor: theme.fill300,
+      },
+      stochastic: {
+        bgColor: theme.backgroundDarkest,
+        upperLineColor: theme.fill400,
+        lowerLineColor: theme.fill400,
+        middleLineColor: theme.fill300,
+      },
     },
   },
   indicators: {

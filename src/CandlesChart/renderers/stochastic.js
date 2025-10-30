@@ -49,13 +49,13 @@ const renderRSI = ({
         y: yScale(indicator.upperLine),
         width: indicatorFrame.xEnd - indicatorFrame.xStart,
         height: yScale(indicator.lowerLine) - yScale(indicator.upperLine),
-        fill: config.theme.theme.backgroundDarkest,
+        fill: config.theme.indicators.stochastic.bgColor,
       },
     },
     {
       type: 'Line',
       attrs: {
-        stroke: config.theme.theme.fill400,
+        stroke: config.theme.indicators.stochastic.upperLineColor,
         strokeWidth: 1,
         dash: [3, 4],
         points: [
@@ -71,7 +71,7 @@ const renderRSI = ({
     {
       type: 'Line',
       attrs: {
-        stroke: config.theme.theme.fill400,
+        stroke: config.theme.indicators.stochastic.upperLineColor,
         strokeWidth: 1,
         dash: [3, 4],
         points: [
@@ -87,7 +87,7 @@ const renderRSI = ({
     {
       type: 'Line',
       attrs: {
-        stroke: config.theme.theme.fill300,
+        stroke: config.theme.indicators.stochastic.middleLineColor,
         strokeWidth: 1,
         dash: [3, 4],
         points: [
@@ -103,7 +103,7 @@ const renderRSI = ({
     {
       type: 'Line',
       attrs: {
-        stroke: config.theme.theme.fill400,
+        stroke: config.theme.indicators.stochastic.lowerLineColor,
         strokeWidth: 1,
         dash: [3, 4],
         points: [

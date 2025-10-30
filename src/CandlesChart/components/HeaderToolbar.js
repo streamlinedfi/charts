@@ -5,7 +5,7 @@ import { AngleDown } from '@styled-icons/fa-solid/AngleDown';
 import { transparentize } from 'polished';
 import React, { useState } from 'react';
 import { Html } from 'react-konva-utils';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import Crosshair from '../assets/crosshair.svg';
 import HArea from '../assets/harea.svg';
 import HLine from '../assets/hline.svg';
@@ -31,6 +31,10 @@ const tools = {
   vline: VLine,
   text: TextIcon,
 };
+
+const Test = styled.div`
+  ${props => console.log(props)}
+`;
 
 export default function HeaderToolbar({ onTimeframeChange }) {
   const context = useContext();
@@ -74,6 +78,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
   return (
     <Html divProps={{ style: { width: '100%' } }}>
       <ThemeProvider theme={uiSystem.theme}>
+        <Test />
         <Div $w="100%" $absolute>
           <Div
             $flex

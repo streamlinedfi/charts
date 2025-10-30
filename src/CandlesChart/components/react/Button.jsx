@@ -57,20 +57,22 @@ function Button(
 
   const styleProps = {
     $border: active
-      ? config.theme.theme.borderColorActive
-      : config.theme.theme.borderColor,
+      ? config.theme.button.borderColorActive
+      : config.theme.button.borderColor,
     $border$hover: active
-      ? config.theme.theme.borderColorActive
-      : config.theme.theme.borderColorHover,
+      ? config.theme.button.borderColorActive
+      : config.theme.button.borderColorHover,
     $boxShadow: `inset 0 0 0 1px ${
       active
-        ? transparentize(0.5, config.theme.theme.borderColorActive)
+        ? transparentize(0.5, config.theme.button.borderColorActive)
         : 'transparent'
     }`,
-    $color: active ? config.theme.theme.colorActive : config.theme.theme.color,
+    $color: active
+      ? config.theme.button.colorActive
+      : config.theme.button.color,
     $color$hover: active
-      ? config.theme.theme.colorActive
-      : config.theme.theme.colorHover,
+      ? config.theme.button.colorActive
+      : config.theme.button.colorHover,
   };
 
   const { height, fontSize, fontWeight, px } = sizesProps[size];

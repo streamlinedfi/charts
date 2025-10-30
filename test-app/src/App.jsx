@@ -4,6 +4,8 @@ import round from 'lodash/round';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import data from './data';
+console.log('TCL: data', data);
+console.log('TCL: CandlesChart', CandlesChart);
 
 const { values } = Object;
 
@@ -58,6 +60,7 @@ function App() {
   const [fullscreen, setFullscreen] = useState(false);
   const [timeframe, setTimeframe] = useState(timeframes.D1);
   const [config, setConfig] = useState({});
+  console.log('TCL: App -> config', config);
 
   useEffect(() => {
     setTimeout(() => {
@@ -66,7 +69,7 @@ function App() {
   }, []);
 
   return (
-    <Div $h="100%" $background={theme => theme.background}>
+    <Div $h="100%" $background={theme => theme.background} $flex $innerCenter>
       <CandlesChart
         loading={loading}
         config={{
@@ -91,7 +94,7 @@ function App() {
               y: value => round(value, decimals),
             },
           },
-          ...config,
+          // ...config,
         }}
         onConfig={setConfig}
         data={data}
