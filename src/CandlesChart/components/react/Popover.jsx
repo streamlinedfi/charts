@@ -2,7 +2,7 @@ import Div from '@streamlinedfi/div';
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { Breakpoints } from '../../../modules/shared/theme.esm';
+import useContext from '../../modules/useContext';
 import useSize from '../../modules/useSize';
 import Close from './Close';
 
@@ -19,6 +19,7 @@ export default function Popover({
   zIndex = 3,
   ...props
 }) {
+  const { config } = useContext();
   const childrenRef = useRef();
   const [, vh] = useSize();
   const [, height] = useSize(childrenRef);
@@ -27,8 +28,12 @@ export default function Popover({
   const [isMobile, setIsMobile] = useState();
 
   useEffect(() => {
-    setIsMobile(Breakpoints.isMobile());
-  }, []);
+    setIsMobile(
+      typeof window !== 'undefined' && typeof document !== 'undefined'
+        ? document.body.clientWidth < config.mobileThreshold
+        : false,
+    );
+  }, [config.mobileThreshold]);
 
   const xMapping = {
     left: {
@@ -108,7 +113,7 @@ export default function Popover({
         <Div
           $cover
           $fixed
-          $z={theme => theme.zIndices.modal - 1}
+          $z={config.theme.popoverMenu.zIndex - 1}
           $background="rgba(0, 0, 0, 0.7)"
           onClick={onOutsideClick}
         />
@@ -116,8 +121,8 @@ export default function Popover({
       <Div
         $display={$display}
         $minW={256}
-        $background={theme => theme.backgroundDarker}
-        $border={theme => `1px solid ${theme.fill300}`}
+        $background={config.theme.popoverMenu.background}
+        $border={config.theme.popoverMenu.borderColor}
         $mobile$borderBottom="none"
         $boxShadow="0 0 2px 1px rgba(0, 0, 0, .3)"
         onClick={e => e.stopPropagation()}
@@ -125,7 +130,7 @@ export default function Popover({
         {...(isMobile
           ? {
               $fixed: true,
-              $z: theme => theme.zIndices.modal,
+              $z: config.theme.popoverMenu.zIndex,
               $left: 8,
               $right: 8,
               $bottom: 0,
@@ -151,7 +156,7 @@ export default function Popover({
               $zIndex={2}
               $w={16}
               $h={16}
-              $background={theme => theme.backgroundDarker}
+              $background={config.theme.popoverMenu.background}
               {...xInnerArrowMapping[x]}
               {...yInnerArrowMapping[y]}
             />
@@ -160,7 +165,7 @@ export default function Popover({
               $zIndex={1}
               $w={14}
               $h={14}
-              $background={theme => theme.fill300}
+              $background={config.theme.popoverMenu.borderColor}
               $boxShadow="0 0 2px 1px rgba(0, 0, 0, .3)"
               {...xOuterArrowMapping[x]}
               {...yOuterArrowMapping[y]}
@@ -184,7 +189,10 @@ export default function Popover({
   }
 
   if (isMobile) {
-    return createPortal(content, document.getElementById('modal-container'));
+    return createPortal(
+      content,
+      document.getElementById('streamlined-container'),
+    );
   }
 
   return content;

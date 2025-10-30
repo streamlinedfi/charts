@@ -2,8 +2,6 @@ import Div from '@streamlinedfi/div';
 import { transparentize } from 'polished';
 import React from 'react';
 import { Html } from 'react-konva-utils';
-import theme from '../../../modules/shared/theme';
-import Close from '../../Close';
 import Aa from '../assets/Aa.svg';
 import HArea from '../assets/harea.svg';
 import HLine from '../assets/hline.svg';
@@ -12,6 +10,7 @@ import Rect from '../assets/rect.svg';
 import Text from '../assets/text.svg';
 import VLine from '../assets/vline.svg';
 import useContext from '../modules/useContext';
+import Close from './react/Close';
 
 const scaleMapping = {
   small: 0.85,
@@ -39,13 +38,7 @@ export default function DrawingToolbar({
   const setColor = onColorChange;
   const setTextSize = onTextSizeChange;
 
-  const colors = [
-    config.theme.lineColor,
-    config.theme.candleUpColor,
-    config.theme.candleDownColor,
-    config.theme.title.color,
-    config.theme.color,
-  ];
+  const colors = config.theme.drawingToolbar.colors;
 
   if (!currentDrawing) {
     return null;
@@ -63,8 +56,8 @@ export default function DrawingToolbar({
         $top={frame.header.yEnd}
         $left="50%"
         $transform="translateX(-50%)"
-        $border={`1px solid ${theme.fill300}`}
-        $background={theme.backgroundDarker}
+        $border={config.theme.drawingToolbar.borderColor}
+        $background={config.theme.drawingToolbar.bgColor}
         $h={34}
         $radius={17}
         $px={0.5}
@@ -75,7 +68,7 @@ export default function DrawingToolbar({
           $innerCenter
           $w={32}
           $h={32}
-          $color={theme.fill800}
+          $color={config.theme.drawingToolbar.iconColor}
         >
           <Icon />
         </Div>
@@ -110,8 +103,16 @@ export default function DrawingToolbar({
                 $w={32}
                 $h={32}
                 $radius={16}
-                $color={textSize === size ? theme.fill800 : theme.fill500}
-                $background={textSize === size ? theme.fill100 : undefined}
+                $color={
+                  textSize === size
+                    ? config.theme.drawingToolbar.textColorActive
+                    : config.theme.drawingToolbar.textColor
+                }
+                $background={
+                  textSize === size
+                    ? config.theme.drawingToolbar.textBgColor
+                    : undefined
+                }
                 onClick={() => setTextSize(size)}
               >
                 <Div as={Aa} $transform={`scale(${scaleMapping[size]})`} />
@@ -122,7 +123,7 @@ export default function DrawingToolbar({
         <Close
           size={24}
           $position="static"
-          $background={theme.fill100}
+          $background={config.theme.drawingToolbar.closeBgColor}
           onClick={() => onRemove(currentDrawing)}
         />
       </Div>

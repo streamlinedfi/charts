@@ -1,6 +1,3 @@
-import useImage from 'use-image';
-import theme from '../../../modules/shared/theme';
-
 export default function renderDrawingToolbar({ config, frame, isSelected }) {
   const width = 256;
 
@@ -12,14 +9,6 @@ export default function renderDrawingToolbar({ config, frame, isSelected }) {
   const circleSize = 16;
   const closeSize = 24;
   const barHeight = 34;
-
-  const colors = [
-    config.theme.lineColor,
-    config.theme.candleUpColor,
-    config.theme.candleDownColor,
-    config.theme.title.color,
-    config.theme.color,
-  ];
 
   const closeX =
     xStart +
@@ -38,14 +27,14 @@ export default function renderDrawingToolbar({ config, frame, isSelected }) {
         y: yStart,
         width,
         height: barHeight,
-        stroke: config.theme.header.toolbarBorderColor,
+        stroke: config.theme.drawingToolbar.borderColor,
         strokeWidth: 1,
         cornerRadius: 17,
-        fill: config.theme.bgColor,
+        fill: config.theme.drawingToolbar.bgColor,
         visible,
       },
     },
-    ...colors.map((color, i) => ({
+    ...config.theme.drawingToolbar.colors.map((color, i) => ({
       type: 'Circle',
       attrs: {
         x:
@@ -71,8 +60,8 @@ export default function renderDrawingToolbar({ config, frame, isSelected }) {
         width: closeSize,
         height: closeSize,
         radius: closeSize / 2,
-        fill: theme.fill100,
-        stroke: theme.fill100,
+        fill: config.theme.drawingToolbar.closeBgColor,
+        stroke: config.theme.drawingToolbar.closeBgColor,
         strokeWidth: 1.5,
         visible,
       },
@@ -80,7 +69,7 @@ export default function renderDrawingToolbar({ config, frame, isSelected }) {
     {
       type: 'Line',
       attrs: {
-        stroke: theme.fill600,
+        stroke: config.theme.drawingToolbar.closeColor,
         strokeWidth: 1.5,
         points: [closeX - 5, closeY - 5, closeX + 5, closeY + 5],
       },
@@ -88,7 +77,7 @@ export default function renderDrawingToolbar({ config, frame, isSelected }) {
     {
       type: 'Line',
       attrs: {
-        stroke: theme.fill600,
+        stroke: config.theme.drawingToolbar.closeColor,
         strokeWidth: 1.5,
         points: [closeX + 5, closeY - 5, closeX - 5, closeY + 5],
       },

@@ -44,7 +44,7 @@ export default function IndicatorsPopover({
       <Div
         $fixed
         $cover
-        $z={theme => theme.zIndices.modal - 1}
+        $z={config.theme.popoverMenu.zIndex - 1}
         onClick={onOutsideClick}
       >
         <Div
@@ -67,7 +67,7 @@ export default function IndicatorsPopover({
           </Popover>
         </Div>
       </Div>,
-      document.getElementById('modal-container'),
+      document.getElementById('streamlined-container'),
     )
   );
 }

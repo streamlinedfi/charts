@@ -7,6 +7,7 @@ import {
   Indicators,
   defaultConfigs as defaultIndicatorConfigs,
 } from '../../modules/indicators';
+import useContext from '../../modules/useContext';
 import DragList, { DragListItem } from '../react/DragList';
 import PopoverMenu from '../react/PopoverMenu';
 import Separator from '../react/Separator';
@@ -26,13 +27,18 @@ function IndicatorItem({
   setRemove,
   ...props
 }) {
+  const { config } = useContext();
   return (
     <Div $flex $h={48} $innerCenter $spaceBetween $px={1.25} {...props}>
       <Div $flex $w="auto" $h="100%" $innerCenter $innerLeft>
-        <Text $size={13} $color={700} $mr={0.5}>
+        <Text
+          $size={13}
+          $color={config.theme.indicatorsMenu.indicatorTextColor}
+          $mr={0.5}
+        >
           {indicatorTextMapping[indicator.indicator] || indicator.indicator}
         </Text>
-        <Text $size={13} $color={500}>
+        <Text $size={13} $color={config.theme.indicatorsMenu.settingsColor}>
           {[
             indicator.length,
             indicator.type,
@@ -52,7 +58,11 @@ function IndicatorItem({
         <Text
           as="button"
           $size={13}
-          $color={indicator.active ? 'blue800' : 400}
+          $color={
+            indicator.active
+              ? config.theme.indicatorsMenu.settingsColorActive
+              : config.theme.indicatorsMenu.settingsColor
+          }
           $mr={0.5}
           onClick={() => setScreen(indicator)}
         >
@@ -75,7 +85,7 @@ function IndicatorItem({
                   $w={20}
                   $relative
                   $left={4}
-                  $fill={theme => theme.fill400}
+                  $fill={config.theme.indicatorsMenu.removeIconColor}
                   $transform="rotate(45deg)"
                 />
               </Div>
@@ -148,12 +158,13 @@ export default function IndicatorsScreen({ context }) {
 
   return (
     <Div $py={1.25}>
-      {/* <Text $px={1.25} $size={16} $weight={600} $color={800} $mb={1.375}>
-        Indicators
-      </Text> */}
       <Div $mb={1.5}>
         <Div $px={1.25} $flex $spaceBetween $mobile$justifyContent="flex-start">
-          <Text $size={13} $color={500} $mb={0.5}>
+          <Text
+            $size={13}
+            $color={config.theme.indicatorsMenu.subtitleColor}
+            $mb={0.5}
+          >
             Main chart
           </Text>
           <Div $relative $mobile$left={8} $mobile$top={-1}>
@@ -162,7 +173,9 @@ export default function IndicatorsScreen({ context }) {
                 as={PlusIcon}
                 $w={20}
                 $fill={
-                  showAddMenu ? theme => theme.fill800 : theme => theme.fill500
+                  showAddMenu
+                    ? config.theme.indicatorsMenu.addIconColorActive
+                    : config.theme.indicatorsMenu.addIconColor
                 }
                 $transition
                 $transform={showAddMenu ? 'rotate(90deg)' : 'rotate(0deg)'}
@@ -176,7 +189,7 @@ export default function IndicatorsScreen({ context }) {
                 y="bottom"
                 xOffset={-20}
                 x="left"
-                $background={theme => theme.backgroundDarkest}
+                $background={config.theme.popoverMenu.bgColor}
                 items={[
                   {
                     type: 'item',
@@ -227,7 +240,12 @@ export default function IndicatorsScreen({ context }) {
         ))}
       </Div>
       <Div>
-        <Text $px={1.25} $size={13} $color={500} $mb={0.5}>
+        <Text
+          $px={1.25}
+          $size={13}
+          $color={config.theme.indicatorsMenu.subtitleColor}
+          $mb={0.5}
+        >
           Indicator windows
         </Text>
         <DragList listItems={indicatorsWithWindows} onDragEnd={setWindows}>
@@ -236,10 +254,10 @@ export default function IndicatorsScreen({ context }) {
               // eslint-disable-next-line react/no-array-index-key
               key={i}
               $px={1.25}
-              $borderTop={theme => `1px solid ${theme.fill200}`}
-              $borderBottom={theme => `1px solid ${theme.fill200}`}
+              $borderTop={config.theme.dragList.borderColor}
+              $borderBottom={config.theme.dragList.borderColor}
               $mb="-1px"
-              $background$hover={theme => theme.backgroundDarker}
+              $background$hover={config.theme.dragList.bgColorHover}
             >
               <IndicatorItem
                 indicator={indicator}

@@ -1,6 +1,7 @@
 import { Div, Text } from '@streamlinedfi/div';
 import uniq from 'lodash/uniq';
 import React from 'react';
+import useContext from '../../modules/useContext';
 
 export default function FieldColor({
   label = 'Color',
@@ -8,9 +9,18 @@ export default function FieldColor({
   value,
   setValue,
 }) {
+  const { config } = useContext();
   return (
-    <Div $px={1.25} $py={1} $borderTop={theme => theme.fill200}>
-      <Text $size={13} $color={600} $mb={0.5}>
+    <Div
+      $px={1.25}
+      $py={1}
+      $borderTop={config.theme.indicatorsMenu.borderColor}
+    >
+      <Text
+        $size={13}
+        $color={config.theme.indicatorsMenu.labelColor}
+        $mb={0.5}
+      >
         {label}
       </Text>
       <Div $flex>

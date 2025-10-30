@@ -89,6 +89,15 @@ function Chart({
     });
   }, [dispatch]);
 
+  useEffect(() => {
+    // create container if it doesn't exist
+    if (!document.getElementById('streamlined-container')) {
+      const container = document.createElement('div');
+      container.id = 'streamlined-container';
+      document.body.appendChild(container);
+    }
+  }, []);
+
   const context = {
     stageRef,
     config,

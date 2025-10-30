@@ -1,8 +1,11 @@
 import Div from '@streamlinedfi/div';
 import { Plus as FeatherPlus } from '@styled-icons/feather/Plus';
 import React from 'react';
+import useContext from '../../modules/useContext';
 
 export default function Close({ onClick, size = 38, ...props }) {
+  const { config } = useContext();
+
   return (
     <Div
       as="button"
@@ -16,10 +19,10 @@ export default function Close({ onClick, size = 38, ...props }) {
       $w={size}
       $h={size}
       $background="none"
-      $background$active={theme => theme.backgroundDarkest}
-      $color={theme => theme.fill400}
-      $color$hover={theme => theme.fill900}
-      $color$active={theme => theme.fill700}
+      $background$active={config.theme.close.bgColorActive}
+      $color={config.theme.close.color}
+      $color$hover={config.theme.close.colorHover}
+      $color$active={config.theme.close.colorActive}
       onClick={onClick}
       {...props}
     >

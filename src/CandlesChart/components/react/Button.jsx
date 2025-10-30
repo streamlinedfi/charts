@@ -1,6 +1,7 @@
 import Div from '@streamlinedfi/div';
-import { mix, tint, transparentize } from 'polished';
+import { transparentize } from 'polished';
 import React, { forwardRef } from 'react';
+import useContext from '../../modules/useContext';
 import Loader from './Loader';
 
 const sizesProps = {
@@ -52,126 +53,25 @@ function Button(
   },
   ref,
 ) {
-  let styleProps = {};
+  const { config } = useContext();
 
-  if (primary) {
-    styleProps = {
-      $color: transparentize(0.1, 'white'),
-      $color$hover: 'white',
-      // $background: theme => transparentize(0.5, theme.primary),
-      // $background$hover: theme => transparentize(0.4, theme.primary),
-      $background: theme => mix(0.5, theme.background, theme.primary),
-      $background$hover: theme => mix(0.4, theme.background, theme.primary),
-      $boxShadow$focus: theme =>
-        `0 0 0 2px ${theme.background},0 0 0 4px ${transparentize(
-          0.6,
-          theme.primary,
-        )}`,
-    };
-  }
-
-  if (primaryWhite) {
-    styleProps = {
-      $color: theme => theme.backgroundDarkest,
-      $color$hover: theme => theme.primary,
-      // $background: theme => transparentize(0.5, theme.primary),
-      // $background$hover: theme => transparentize(0.4, theme.primary),
-      $background: theme => theme.fill800,
-      $background$hover: theme => theme.fill900,
-      $boxShadow$focus: theme =>
-        `0 0 0 2px ${theme.background},0 0 0 4px ${theme.fill700}`,
-    };
-  }
-
-  if (secondary) {
-    styleProps = {
-      $background$hover: theme => tint(0.04, theme.background),
-      $border$hover: theme => `1px solid ${theme.fill300}`,
-      $color: theme => theme.fill700,
-      $color$hover: theme => theme.fill900,
-      $border: '1px solid transparent',
-      $boxShadow$focus: theme =>
-        `0 0 0 2px ${theme.background},0 0 0 4px ${theme.fill300}`,
-    };
-
-    if (!invisible) {
-      styleProps = {
-        ...styleProps,
-        $background: theme => theme.background,
-        $border: theme => `1px solid ${theme.fill300}`,
-      };
-    }
-  }
-
-  if (danger) {
-    styleProps = {
-      $color: transparentize(0.1, 'white'),
-      $color$hover: 'white',
-      $background: theme => transparentize(0.6, theme.error),
-      $background$hover: theme => transparentize(0.5, theme.error),
-      $boxShadow$focus: theme =>
-        `0 0 0 2px ${theme.background},0 0 0 4px ${transparentize(
-          0.6,
-          theme.error,
-        )}`,
-    };
-  }
-
-  if (buy) {
-    styleProps = {
-      $color: transparentize(0.1, 'white'),
-      $color$hover: 'white',
-      $background: theme => mix(0.25, theme.background, theme.green),
-      $background$hover: theme => mix(0.1, theme.background, theme.green),
-      $boxShadow$focus: theme =>
-        `0 0 0 2px ${theme.background},0 0 0 4px ${transparentize(
-          0.6,
-          theme.green,
-        )}`,
-    };
-  }
-
-  if (sell) {
-    styleProps = {
-      $color: transparentize(0.1, 'white'),
-      $color$hover: 'white',
-      $background: theme => mix(0.25, theme.background, theme.red),
-      $background$hover: theme => mix(0.1, theme.background, theme.red),
-      $boxShadow$focus: theme =>
-        `0 0 0 2px ${theme.background},0 0 0 4px ${transparentize(
-          0.6,
-          theme.red,
-        )}`,
-    };
-  }
-
-  if (disabled || loading) {
-    styleProps = {
-      ...styleProps,
-      $background$hover: undefined,
-      $background$important: theme => theme.fill200,
-      $color$important: theme => theme.fill500,
-      $boxShadow$focus: theme =>
-        `0 0 0 2px ${theme.background},0 0 0 4px ${theme => theme.fill100}`,
-    };
-  }
-
-  if (!primary && !primaryWhite && !secondary && !danger && !buy && !sell) {
-    styleProps = {
-      $border: props.$border
-        ? undefined
-        : theme => (active ? theme.blue800 : theme.fill200),
-      $border$hover: props.$border$hover
-        ? undefined
-        : theme => (active ? theme.blue800 : theme.fill300),
-      $boxShadow: theme =>
-        `inset 0 0 0 1px ${
-          active ? transparentize(0.5, theme.blue800) : 'transparent'
-        }`,
-      $color: active ? theme => theme.blue800 : theme => theme.fill700,
-      $color$hover: active ? theme => theme.blue800 : theme => theme.fill800,
-    };
-  }
+  const styleProps = {
+    $border: active
+      ? config.theme.theme.borderColorActive
+      : config.theme.theme.borderColor,
+    $border$hover: active
+      ? config.theme.theme.borderColorActive
+      : config.theme.theme.borderColorHover,
+    $boxShadow: `inset 0 0 0 1px ${
+      active
+        ? transparentize(0.5, config.theme.theme.borderColorActive)
+        : 'transparent'
+    }`,
+    $color: active ? config.theme.theme.colorActive : config.theme.theme.color,
+    $color$hover: active
+      ? config.theme.theme.colorActive
+      : config.theme.theme.colorHover,
+  };
 
   const { height, fontSize, fontWeight, px } = sizesProps[size];
 

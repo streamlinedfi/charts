@@ -5,11 +5,6 @@ import { AngleDown } from '@styled-icons/fa-solid/AngleDown';
 import { transparentize } from 'polished';
 import React, { useState } from 'react';
 import { Html } from 'react-konva-utils';
-import { useSelector } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
-import { Breakpoints } from '../../../modules/shared/theme';
-import Button from '../../Button';
-import Popover from '../../Popover';
 import Crosshair from '../assets/crosshair.svg';
 import HArea from '../assets/harea.svg';
 import HLine from '../assets/hline.svg';
@@ -20,6 +15,8 @@ import VLine from '../assets/vline.svg';
 import useContext from '../modules/useContext';
 import useScreenshot from '../modules/useScreenshot';
 import IndicatorsMenu from './IndicatorsMenu';
+import Button from './react/Button';
+import Popover from './react/Popover';
 
 const { entries } = Object;
 
@@ -35,14 +32,16 @@ const tools = {
 
 export default function HeaderToolbar({ onTimeframeChange }) {
   const context = useContext();
-  const { frame, config, setConfig, dispatch } = context;
+  const { frame, config, setConfig } = context;
   const [showTimeframes, setShowTimeframes] = useState(false);
   const [showTools, setShowTools] = useState(false);
   const downloadScreenshot = useScreenshot();
-  const theme = useSelector(state => state.ui.theme);
   const currentTimeframe = config.timeframe;
 
-  const isMobile = Breakpoints.isMobile();
+  const isMobile =
+    typeof window !== 'undefined' && typeof document !== 'undefined'
+      ? document.body.clientWidth < config.mobileThreshold
+      : false;
   const condensedMode = config.width < 472;
 
   const { x, y, reference, floating, strategy } = useFloating({
@@ -72,41 +71,222 @@ export default function HeaderToolbar({ onTimeframeChange }) {
 
   return (
     <Html divProps={{ style: { width: '100%' } }}>
-      <ThemeProvider theme={theme}>
-        <Div $w="100%" $absolute>
+      <Div $w="100%" $absolute>
+        <Div
+          $flex
+          $w="auto"
+          $absolute
+          $top={frame.header.yStart}
+          {...(config.width > breakpoint
+            ? {
+                $left: '50%',
+                $transform: 'translateX(-50%)',
+              }
+            : {
+                $right: config.theme.header.marginRight,
+              })}
+        >
           <Div
+            $relative
             $flex
+            $innerCenter
             $w="auto"
-            $absolute
-            $top={frame.header.yStart}
-            {...(config.width > breakpoint
-              ? {
-                  $left: '50%',
-                  $transform: 'translateX(-50%)',
-                }
-              : {
-                  $right: config.theme.header.marginRight,
-                })}
+            $border={
+              showTimeframes
+                ? `1px solid ${config.theme.header.buttonBorderColorActive}`
+                : `1px solid ${config.theme.header.buttonBorderColor}`
+            }
+            $background={config.theme.header.background}
+            $h={34}
+            $radius={17}
+            $mr={0.5}
           >
+            {config.width > breakpoint ? (
+              config.timeframes.map(tf => (
+                <Div
+                  key={tf.id}
+                  $flex
+                  as="button"
+                  $shrink="0"
+                  $innerCenter
+                  $w={32}
+                  $h={32}
+                  $radius={16}
+                  $fontSize={13}
+                  $color={
+                    currentTimeframe.id === tf.id
+                      ? config.theme.header.buttonColorActive
+                      : config.theme.header.buttonColor
+                  }
+                  $background={
+                    currentTimeframe.id === tf.id
+                      ? config.theme.header.buttonBgColorActive
+                      : undefined
+                  }
+                  onClick={() => onTimeframeChange(tf)}
+                >
+                  {tf.text}
+                </Div>
+              ))
+            ) : (
+              <>
+                <Div
+                  $flex
+                  as="button"
+                  $shrink="0"
+                  $innerCenter
+                  $h={32}
+                  $px={0.75}
+                  $radius={16}
+                  $fontSize={13}
+                  $color={
+                    showTimeframes
+                      ? config.theme.header.buttonColorActive
+                      : config.theme.header.buttonColor
+                  }
+                  $boxShadow={`inset 0 0 0 1px ${
+                    showTimeframes
+                      ? transparentize(
+                          0.5,
+                          config.theme.header.buttonColorActive,
+                        )
+                      : 'transparent'
+                  }`}
+                  onClick={() => setShowTimeframes(!showTimeframes)}
+                >
+                  <Div as="span" $mr={0.25}>
+                    {currentTimeframe.text}
+                  </Div>
+                  <Div as={AngleDown} $w={12} />
+                </Div>
+                {showTimeframes && (
+                  <Popover
+                    x="center"
+                    y="bottom"
+                    onOutsideClick={() => setShowTimeframes(false)}
+                    $p={1.25}
+                    $color={config.theme.popoverMenu.color}
+                    showAngle={false}
+                    $textAlign="left"
+                  >
+                    <Text
+                      $size={13}
+                      $weight={600}
+                      $color={config.theme.popoverMenu.uppercaseColor}
+                      $uppercase
+                      $mb={0.5}
+                    >
+                      Minute
+                    </Text>
+                    <Div $flex $mb={1.5}>
+                      {config.timeframes
+                        .filter(td => /^M/.test(td.id))
+                        .map(tf => (
+                          <Button
+                            active={tf.id === currentTimeframe.id}
+                            size="small"
+                            rounded
+                            key={tf.id}
+                            $mr={0.5}
+                            onClick={() => {
+                              onTimeframeChange(tf);
+                              setShowTimeframes(false);
+                            }}
+                          >
+                            {tf.text}
+                          </Button>
+                        ))}
+                    </Div>
+                    <Text
+                      $size={13}
+                      $weight={600}
+                      $color={config.theme.popoverMenu.uppercaseColor}
+                      $uppercase
+                      $mb={0.5}
+                    >
+                      Hour
+                    </Text>
+                    <Div $flex $mb={1.5}>
+                      {config.timeframes
+                        .filter(td => /^H/.test(td.id))
+                        .map(tf => (
+                          <Button
+                            active={tf.id === currentTimeframe.id}
+                            size="small"
+                            rounded
+                            key={tf.id}
+                            $mr={0.5}
+                            onClick={() => {
+                              onTimeframeChange(tf);
+                              setShowTimeframes(false);
+                            }}
+                          >
+                            {tf.text}
+                          </Button>
+                        ))}
+                    </Div>
+                    <Text
+                      $size={13}
+                      $weight={600}
+                      $color={config.theme.popoverMenu.uppercaseColor}
+                      $uppercase
+                      $mb={0.5}
+                    >
+                      Day/Week
+                    </Text>
+                    <Div $flex>
+                      {config.timeframes
+                        .filter(td => /^(D|W)/.test(td.id))
+                        .map(tf => (
+                          <Button
+                            active={tf.id === currentTimeframe.id}
+                            size="small"
+                            rounded
+                            key={tf.id}
+                            $mr={0.5}
+                            onClick={() => {
+                              onTimeframeChange(tf);
+                              setShowTimeframes(false);
+                            }}
+                          >
+                            {tf.text}
+                          </Button>
+                        ))}
+                    </Div>
+                  </Popover>
+                )}
+              </>
+            )}
+          </Div>
+
+          {!isMobile && (
             <Div
               $relative
               $flex
               $innerCenter
               $w="auto"
               $border={
-                showTimeframes
-                  ? `1px solid ${theme.primary}`
-                  : `1px solid ${theme.fill300}`
+                showTools
+                  ? `1px solid ${config.theme.header.buttonBorderColorActive}`
+                  : `1px solid ${config.theme.header.buttonBorderColor}`
               }
-              $background={theme.backgroundDarker}
+              $boxShadow={`inset 0 0 0 1px ${
+                showTools
+                  ? transparentize(
+                      0.5,
+                      config.theme.header.buttonBorderColorActive,
+                    )
+                  : 'transparent'
+              }`}
+              $background={config.theme.header.background}
               $h={34}
               $radius={17}
               $mr={0.5}
             >
               {config.width > breakpoint ? (
-                config.timeframes.map(tf => (
+                entries(tools).map(([tool, Icon]) => (
                   <Div
-                    key={tf.id}
+                    key={tool}
                     $flex
                     as="button"
                     $shrink="0"
@@ -114,18 +294,20 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                     $w={32}
                     $h={32}
                     $radius={16}
-                    $fontSize={13}
                     $color={
-                      currentTimeframe.id === tf.id
-                        ? theme.fill800
-                        : theme.fill500
+                      config.tool === tool
+                        ? config.theme.header.buttonColorActive
+                        : config.theme.header.buttonColor
                     }
                     $background={
-                      currentTimeframe.id === tf.id ? theme.fill100 : undefined
+                      config.tool === tool
+                        ? config.theme.header.buttonBgColorActive
+                        : undefined
                     }
-                    onClick={() => onTimeframeChange(tf)}
+                    onClick={() => setTool(tool)}
+                    aria-label={tool}
                   >
-                    {tf.text}
+                    <Icon />
                   </Div>
                 ))
               ) : (
@@ -133,331 +315,151 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                   <Div
                     $flex
                     as="button"
+                    aria-label="Chart tool"
                     $shrink="0"
                     $innerCenter
                     $h={32}
                     $px={0.75}
                     $radius={16}
-                    $fontSize={13}
-                    $color={showTimeframes ? theme.primary : theme.fill500}
-                    $boxShadow={theme =>
-                      `inset 0 0 0 1px ${
-                        showTimeframes
-                          ? transparentize(0.5, theme.primary)
-                          : 'transparent'
-                      }`
+                    $color={
+                      showTools
+                        ? config.theme.header.buttonColorActive
+                        : config.theme.header.buttonColor
                     }
-                    onClick={() => setShowTimeframes(!showTimeframes)}
+                    onClick={() => setShowTools(!showTools)}
                   >
-                    <Div as="span" $mr={0.25}>
-                      {currentTimeframe.text}
-                    </Div>
+                    <Div as={CurrentToolIcon} $mr={0.25} />
                     <Div as={AngleDown} $w={12} />
                   </Div>
-                  {showTimeframes && (
+                  {showTools && (
                     <Popover
-                      x="center"
+                      x="left"
                       y="bottom"
-                      onOutsideClick={() => setShowTimeframes(false)}
-                      $p={1.25}
-                      $color={theme => theme.fill700}
+                      onOutsideClick={() => setShowTools(false)}
+                      $p={1}
+                      $color={config.theme.popoverMenu.color}
                       showAngle={false}
                       $textAlign="left"
                     >
                       <Text
                         $size={13}
                         $weight={600}
-                        $color={500}
+                        $color={config.theme.popoverMenu.uppercaseColor}
                         $uppercase
                         $mb={0.5}
+                        $center
                       >
-                        Minute
-                      </Text>
-                      <Div $flex $mb={1.5}>
-                        {config.timeframes
-                          .filter(td => /^M/.test(td.id))
-                          .map(tf => (
-                            <Button
-                              active={tf.id === currentTimeframe.id}
-                              size="small"
-                              rounded
-                              key={tf.id}
-                              $mr={0.5}
-                              onClick={() => {
-                                onTimeframeChange(tf);
-                                setShowTimeframes(false);
-                              }}
-                            >
-                              {tf.text}
-                            </Button>
-                          ))}
-                      </Div>
-                      <Text
-                        $size={13}
-                        $weight={600}
-                        $color={500}
-                        $uppercase
-                        $mb={0.5}
-                      >
-                        Hour
-                      </Text>
-                      <Div $flex $mb={1.5}>
-                        {config.timeframes
-                          .filter(td => /^H/.test(td.id))
-                          .map(tf => (
-                            <Button
-                              active={tf.id === currentTimeframe.id}
-                              size="small"
-                              rounded
-                              key={tf.id}
-                              $mr={0.5}
-                              onClick={() => {
-                                onTimeframeChange(tf);
-                                setShowTimeframes(false);
-                              }}
-                            >
-                              {tf.text}
-                            </Button>
-                          ))}
-                      </Div>
-                      <Text
-                        $size={13}
-                        $weight={600}
-                        $color={500}
-                        $uppercase
-                        $mb={0.5}
-                      >
-                        Day/Week
+                        Tools
                       </Text>
                       <Div $flex>
-                        {config.timeframes
-                          .filter(td => /^(D|W)/.test(td.id))
-                          .map(tf => (
-                            <Button
-                              active={tf.id === currentTimeframe.id}
-                              size="small"
-                              rounded
-                              key={tf.id}
-                              $mr={0.5}
-                              onClick={() => {
-                                onTimeframeChange(tf);
-                                setShowTimeframes(false);
-                              }}
-                            >
-                              {tf.text}
-                            </Button>
-                          ))}
+                        {entries(tools).map(([tool, Icon]) => (
+                          <Button
+                            key={tool}
+                            active={tool === config.tool}
+                            size="small"
+                            rounded
+                            $mx={0.25}
+                            onClick={() => {
+                              setTool(tool);
+                              setShowTools(false);
+                            }}
+                          >
+                            <Icon />
+                          </Button>
+                        ))}
                       </Div>
                     </Popover>
                   )}
                 </>
               )}
             </Div>
-
-            {!isMobile && (
-              <Div
-                $relative
-                $flex
-                $innerCenter
-                $w="auto"
-                $border={
-                  showTools
-                    ? `1px solid ${theme.primary}`
-                    : `1px solid ${theme.fill300}`
-                }
-                $boxShadow={theme =>
-                  `inset 0 0 0 1px ${
-                    showTools
-                      ? transparentize(0.5, theme.primary)
-                      : 'transparent'
-                  }`
-                }
-                $background={theme.backgroundDarker}
-                $h={34}
-                $radius={17}
-                $mr={0.5}
-              >
-                {config.width > breakpoint ? (
-                  entries(tools).map(([tool, Icon]) => (
-                    <Div
-                      key={tool}
-                      $flex
-                      as="button"
-                      $shrink="0"
-                      $innerCenter
-                      $w={32}
-                      $h={32}
-                      $radius={16}
-                      $color={
-                        config.tool === tool ? theme.fill800 : theme.fill500
-                      }
-                      $background={
-                        config.tool === tool ? theme.fill100 : undefined
-                      }
-                      onClick={() => setTool(tool)}
-                      aria-label={tool}
-                    >
-                      <Icon />
-                    </Div>
-                  ))
-                ) : (
-                  <>
-                    <Div
-                      $flex
-                      as="button"
-                      aria-label="Chart tool"
-                      $shrink="0"
-                      $innerCenter
-                      $h={32}
-                      $px={0.75}
-                      $radius={16}
-                      $color={showTools ? theme.primary : theme.fill500}
-                      onClick={() => setShowTools(!showTools)}
-                    >
-                      <Div as={CurrentToolIcon} $mr={0.25} />
-                      <Div as={AngleDown} $w={12} />
-                    </Div>
-                    {showTools && (
-                      <Popover
-                        x="left"
-                        y="bottom"
-                        onOutsideClick={() => setShowTools(false)}
-                        $p={1}
-                        $color={theme => theme.fill700}
-                        showAngle={false}
-                        $textAlign="left"
-                      >
-                        <Text
-                          $size={13}
-                          $weight={600}
-                          $color={500}
-                          $uppercase
-                          $mb={0.5}
-                          $center
-                        >
-                          Tools
-                        </Text>
-                        <Div $flex>
-                          {entries(tools).map(([tool, Icon]) => (
-                            <Button
-                              key={tool}
-                              active={tool === config.tool}
-                              size="small"
-                              rounded
-                              $mx={0.25}
-                              onClick={() => {
-                                setTool(tool);
-                                setShowTools(false);
-                              }}
-                            >
-                              <Icon />
-                            </Button>
-                          ))}
-                        </Div>
-                      </Popover>
-                    )}
-                  </>
-                )}
-              </Div>
-            )}
-            {!condensedMode && (
-              <Div
-                ref={reference}
-                as="button"
-                $flex
-                $innerCenter
-                $w="auto"
-                $border={`1px solid ${
-                  config.indicators.showMenu ? theme.blue800 : theme.fill300
-                }`}
-                $background={theme.backgroundDarker}
-                $h={34}
-                $radius={17}
-                $px={0.75}
-                $fontSize={13}
-                $color={
-                  config.indicators.showMenu ? theme.blue800 : theme.fill500
-                }
-                $mr={0.5}
-                onClick={() =>
-                  setShowIndicatorsMenu(!config.indicators.showMenu)
-                }
-              >
-                Indicators
-              </Div>
-            )}
-            {config.indicators.showMenu && (
-              <IndicatorsMenu
-                floating={floating}
-                strategy={strategy}
-                x={x}
-                y={y}
-                context={context}
-                onOutsideClick={() => setShowIndicatorsMenu(false)}
-              />
-            )}
-            {config.width >= 584 && (
-              <Div
-                as="button"
-                $flex
-                $innerCenter
-                $w="auto"
-                $border={`1px solid ${theme.fill300}`}
-                $background={theme.backgroundDarker}
-                $h={34}
-                $radius={17}
-                $px={0.75}
-                $fontSize={13}
-                $color={theme.fill500}
-                $mr={0.5}
-                onClick={downloadScreenshot}
-              >
-                Screenshot
-              </Div>
-            )}
-            {config.showFullscreenButton && (
-              <Div
-                as="button"
-                $flex
-                $innerCenter
-                $w="auto"
-                $border={`1px solid ${theme.fill300}`}
-                $background={theme.backgroundDarker}
-                $h={34}
-                $radius={17}
-                $px={0.75}
-                $fontSize={13}
-                $color={theme.fill500}
-                onClick={() =>
-                  setConfig({
-                    ...config,
-                    fullscreen: !config.fullscreen,
-                  })
-                }
-              >
-                <Div as={Fullscreen} $w={20} $fill={theme => theme.fill500} />
-              </Div>
-            )}
-            {/* <Button
-              $absolute
-              $z={2}
-              $top={20}
-              // $right={fullsize ? 296 + 20 : 20}
-              size="small"
-              rounded
-              onClick={() => setFullsize(!fullsize)}
-              $borderColor={theme => theme.fill300}
-              aria-label="chart fullsize"
+          )}
+          {!condensedMode && (
+            <Div
+              ref={reference}
+              as="button"
+              $flex
+              $innerCenter
+              $w="auto"
+              $border={`1px solid ${
+                config.indicators.showMenu
+                  ? config.theme.header.buttonBorderColorActive
+                  : config.theme.header.buttonBorderColor
+              }`}
+              $background={config.theme.header.background}
+              $h={34}
+              $radius={17}
+              $px={0.75}
+              $fontSize={13}
+              $color={
+                config.indicators.showMenu
+                  ? config.theme.header.buttonColorActive
+                  : config.theme.header.buttonColor
+              }
+              $mr={0.5}
+              onClick={() => setShowIndicatorsMenu(!config.indicators.showMenu)}
             >
-              
-            </Button> */}
-          </Div>
+              Indicators
+            </Div>
+          )}
+          {config.indicators.showMenu && (
+            <IndicatorsMenu
+              floating={floating}
+              strategy={strategy}
+              x={x}
+              y={y}
+              context={context}
+              onOutsideClick={() => setShowIndicatorsMenu(false)}
+            />
+          )}
+          {config.width >= 584 && (
+            <Div
+              as="button"
+              $flex
+              $innerCenter
+              $w="auto"
+              $border={`1px solid ${config.theme.header.buttonBorderColor}`}
+              $background={config.theme.header.background}
+              $h={34}
+              $radius={17}
+              $px={0.75}
+              $fontSize={13}
+              $color={config.theme.header.buttonColor}
+              $mr={0.5}
+              onClick={downloadScreenshot}
+            >
+              Screenshot
+            </Div>
+          )}
+          {config.showFullscreenButton && (
+            <Div
+              as="button"
+              $flex
+              $innerCenter
+              $w="auto"
+              $border={`1px solid ${config.theme.header.buttonBorderColor}`}
+              $background={config.theme.header.background}
+              $h={34}
+              $radius={17}
+              $px={0.75}
+              $fontSize={13}
+              $color={config.theme.header.buttonColor}
+              onClick={() =>
+                setConfig({
+                  ...config,
+                  fullscreen: !config.fullscreen,
+                })
+              }
+            >
+              <Div
+                as={Fullscreen}
+                $w={20}
+                $fill={config.theme.header.buttonColor}
+              />
+            </Div>
+          )}
         </Div>
-        {/* <IndicatorsModal
-          show={showIndicators}
-          onClose={() => setShowIndicators(false)}
-        /> */}
-      </ThemeProvider>
+      </Div>
     </Html>
   );
 }

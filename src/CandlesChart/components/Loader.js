@@ -1,8 +1,6 @@
 import { transparentize } from 'polished';
 import React from 'react';
 import { Html } from 'react-konva-utils';
-import { ThemeProvider } from 'styled-components';
-import theme from '../../../modules/shared/theme';
 import useContext from '../modules/useContext';
 import { Layer } from './konva';
 import LoaderComponent from './react/Loader';
@@ -16,16 +14,14 @@ function Loader({ loading }) {
   return (
     <Layer>
       <Html divProps={{ style: { width: '100%' } }}>
-        <ThemeProvider theme={theme}>
-          <LoaderComponent
-            $absolute
-            $left={frame.mainInner.xStart}
-            $top={frame.mainInner.yStart}
-            $width={frame.mainInner.width}
-            $height={frame.mainInner.height}
-            $background={transparentize(0.5, config.theme.bgColor)}
-          />
-        </ThemeProvider>
+        <LoaderComponent
+          $absolute
+          $left={frame.mainInner.xStart}
+          $top={frame.mainInner.yStart}
+          $width={frame.mainInner.width}
+          $height={frame.mainInner.height}
+          $background={transparentize(0.5, config.theme.bgColor)}
+        />
       </Html>
     </Layer>
   );

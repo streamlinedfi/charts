@@ -43,13 +43,19 @@ export default function Indicator({
           })
         }
       >
-        <Div as={ChevronLeft} $w={16} $color={theme => theme.blue800} />
-        <Text $size={13} $lineH={16} $color={theme => theme.blue800}>
+        <Div as={ChevronLeft} $w={16} $color={config.theme.primary} />
+        <Text $size={13} $lineH={16} $color={config.theme.primary}>
           Indicators
         </Text>
       </Div>
       <Div $px={1.25} $flex $spaceBetween>
-        <Text $size={16} $lineH={30} $weight={600} $color={800} $mb={1.375}>
+        <Text
+          $size={16}
+          $lineH={30}
+          $weight={600}
+          $color={config.theme.indicatorsMenu.titleColor}
+          $mb={1.375}
+        >
           {indicator.indicator}
         </Text>
         <Switch
@@ -60,14 +66,18 @@ export default function Indicator({
       <Div $w="100%" $outerCenter $overflowY="scroll" $maxH={360}>
         {preSettingsChildren}
         <Div $flex $spaceBetween $mb={0.5}>
-          <Text $px={1.25} $size={13} $color={500}>
+          <Text
+            $px={1.25}
+            $size={13}
+            $color={config.theme.indicatorsMenu.settingsColor}
+          >
             Settings
           </Text>
           <Text
             as="button"
             $px={1.25}
             $size={13}
-            $color={500}
+            $color={config.theme.indicatorsMenu.settingsColor}
             onClick={() => {
               const { active, ...defaults } = defaultConfigs[
                 indicator.indicator

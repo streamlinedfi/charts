@@ -1,5 +1,6 @@
 import { Div, Text } from '@streamlinedfi/div';
 import React from 'react';
+import useContext from '../../modules/useContext';
 import MenuItem from './MenuItem';
 import Popover from './Popover';
 import Separator from './Separator';
@@ -26,6 +27,8 @@ export default function PopoverMenu({
   showAngle = false,
   ...props
 }) {
+  const { config } = useContext();
+
   return (
     <Popover
       $display={show ? 'block' : 'none'}
@@ -35,7 +38,7 @@ export default function PopoverMenu({
       yOffset={yOffset}
       onOutsideClick={() => setShow(false)}
       $py={0.75}
-      $color={theme => theme.fill700}
+      $color={config.theme.popoverMenu.color}
       showAngle={showAngle}
       $textAlign="left"
       {...props}
@@ -48,9 +51,13 @@ export default function PopoverMenu({
               $py={0.375}
               $px={1.25}
               $mx={0.5}
-              $color$hover={theme => theme.fill900}
             >
-              <Text $size={12} $weight={600} $color={500} $uppercase>
+              <Text
+                $size={12}
+                $weight={600}
+                $color={config.theme.popoverMenu.uppercaseColor}
+                $uppercase
+              >
                 {item.props.text}
               </Text>
             </Div>

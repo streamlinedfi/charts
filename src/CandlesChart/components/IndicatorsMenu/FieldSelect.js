@@ -1,6 +1,6 @@
 import { Div, Text } from '@streamlinedfi/div';
-import { tint } from 'polished';
 import React from 'react';
+import useContext from '../../modules/useContext';
 import Button from '../react/Button';
 
 export default function FieldSelect({
@@ -9,9 +9,18 @@ export default function FieldSelect({
   setValue,
   options,
 }) {
+  const { config } = useContext();
   return (
-    <Div $px={1.25} $py={1} $borderTop={theme => theme.fill200}>
-      <Text $size={13} $color={600} $mb={0.5}>
+    <Div
+      $px={1.25}
+      $py={1}
+      $borderTop={config.theme.indicatorsMenu.borderColor}
+    >
+      <Text
+        $size={13}
+        $color={config.theme.indicatorsMenu.labelColor}
+        $mb={0.5}
+      >
         {label}
       </Text>
       <Div $flex>
@@ -22,11 +31,11 @@ export default function FieldSelect({
             $mr={0.5}
             active={option.value === value}
             onClick={() => setValue(option.value)}
-            $background={theme => tint(0.02, theme.background)}
-            $border={theme =>
+            $background={config.theme.indicatorsMenu.buttonBgColor}
+            $border={
               option.value === value
-                ? theme.blue800
-                : tint(0.02, theme.background)
+                ? config.theme.primary
+                : config.theme.indicatorsMenu.buttonBgColor
             }
           >
             {option.text}

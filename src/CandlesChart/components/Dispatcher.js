@@ -1,9 +1,6 @@
 import Div from '@streamlinedfi/div';
 import React, { memo, useRef, useState } from 'react';
 import { Html } from 'react-konva-utils';
-import { useSelector } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
-import theme from '../../../modules/shared/theme';
 import isEqualProps from '../modules/isEqualProps';
 import {
   useOnLoadMore,
@@ -25,7 +22,10 @@ function Dispatcher({ onLoadMore }) {
   useXScaleDispatch();
   useYScaleDispatch();
   useOnLoadMore(onLoadMore);
-  const isMobile = useSelector(state => state.ui.isMobile);
+  const isMobile =
+    typeof window !== 'undefined' && typeof document !== 'undefined'
+      ? document.body.clientWidth < config.mobileThreshold
+      : false;
 
   // tmp solution to prevent interacting with the chart
   // and allow vertical scrolling of the page on mobile
@@ -34,15 +34,13 @@ function Dispatcher({ onLoadMore }) {
     return (
       <Layer>
         <Html divProps={{ style: { zIndex: 1, width: '100%' } }}>
-          <ThemeProvider theme={theme}>
-            <Div
-              $absolute
-              $left={0}
-              $top={0}
-              $width={config.width}
-              $height={config.height}
-            />
-          </ThemeProvider>
+          <Div
+            $absolute
+            $left={0}
+            $top={0}
+            $width={config.width}
+            $height={config.height}
+          />
         </Html>
       </Layer>
     );
