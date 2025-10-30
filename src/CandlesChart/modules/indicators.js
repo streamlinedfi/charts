@@ -1,5 +1,3 @@
-import theme from '../../../modules/shared/theme';
-
 export const Indicators = {
   MA: 'Moving Average',
   BB: 'Bollinger Bands',
@@ -16,7 +14,7 @@ export const Screens = {
   ...Indicators,
 };
 
-export const defaultConfigs = {
+export const createDefaultIndicatorConfigs = theme => ({
   [Indicators.MA]: {
     indicator: Indicators.MA,
     active: true,
@@ -95,4 +93,4 @@ export const defaultConfigs = {
     thickness: 1.5,
     defaultHeight: 72,
   },
-};
+});

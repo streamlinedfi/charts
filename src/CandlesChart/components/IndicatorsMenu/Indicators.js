@@ -3,10 +3,7 @@ import { Plus as PlusIcon } from '@styled-icons/evaicons-solid/Plus';
 import sortBy from 'lodash/sortBy';
 import React, { useState } from 'react';
 import arrayReplace from '../../modules/arrayReplace';
-import {
-  Indicators,
-  defaultConfigs as defaultIndicatorConfigs,
-} from '../../modules/indicators';
+import { Indicators } from '../../modules/indicators';
 import useContext from '../../modules/useContext';
 import DragList, { DragListItem } from '../react/DragList';
 import PopoverMenu from '../react/PopoverMenu';
@@ -203,16 +200,19 @@ export default function IndicatorsScreen({ context }) {
                             mainChart: [
                               ...config.indicators.mainChart,
                               {
-                                ...defaultIndicatorConfigs[Indicators.MA],
+                                ...config.indicators.defaultConfig[
+                                  Indicators.MA
+                                ],
                                 color:
-                                  defaultIndicatorConfigs[
+                                  config.indicators.defaultConfig[
                                     Indicators.MA
                                   ].colorOptions.find(color =>
                                     config.indicators.mainChart.some(
                                       ic => ic.color !== color,
                                     ),
                                   ) ||
-                                  defaultIndicatorConfigs[Indicators.MA].color,
+                                  config.indicators.defaultConfig[Indicators.MA]
+                                    .color,
                               },
                             ],
                           },

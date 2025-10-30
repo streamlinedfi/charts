@@ -1,10 +1,7 @@
 import { format as formatNumber } from 'friendly-numbers';
 import moment from 'moment-timezone';
 import { tint, transparentize } from 'polished';
-import {
-  Indicators,
-  defaultConfigs as defaultIndicatorConfigs,
-} from './indicators';
+import { Indicators, createDefaultIndicatorConfigs } from './indicators';
 
 const theme = {
   fontFamily: '-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif',
@@ -32,6 +29,8 @@ const theme = {
   backgroundDarker: '#1d222d',
   backgroundDarkest: '#181c25',
 };
+
+const defaultIndicatorConfigs = createDefaultIndicatorConfigs(theme);
 
 export default {
   title: '',
@@ -264,5 +263,6 @@ export default {
       defaultIndicatorConfigs[Indicators.STO],
       defaultIndicatorConfigs[Indicators.ROC],
     ],
+    defaultConfig: defaultIndicatorConfigs,
   },
 };

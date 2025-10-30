@@ -2,7 +2,7 @@ import { Div, Text } from '@streamlinedfi/div';
 import { ChevronLeft } from '@styled-icons/octicons/ChevronLeft';
 import React from 'react';
 import arrayReplace from '../../modules/arrayReplace';
-import { Screens, defaultConfigs } from '../../modules/indicators';
+import { Screens } from '../../modules/indicators';
 import Switch from '../react/Switch';
 
 export default function Indicator({
@@ -79,7 +79,7 @@ export default function Indicator({
             $size={13}
             $color={config.theme.indicatorsMenu.settingsColor}
             onClick={() => {
-              const { active, ...defaults } = defaultConfigs[
+              const { active, ...defaults } = config.indicators.defaultConfig[
                 indicator.indicator
               ];
               setConfig({

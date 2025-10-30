@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Html } from 'react-konva-utils';
+import { ThemeProvider } from 'styled-components';
+import uiSystem from '../modules/uiSystem';
 import useContext from '../modules/useContext';
 import { Layer } from './konva';
 import MenuItem from './react/MenuItem';
@@ -33,47 +35,49 @@ function Menu() {
     <Layer>
       {show && (
         <Html divProps={{ style: { width: '100%' } }}>
-          <Popover
-            onOutsideClick={() => setShow(null)}
-            $top={show.y}
-            $left={show.x}
-            $py={0.75}
-            $w={256}
-            $color={config.theme.popoverMenu.color}
-            showAngle={false}
-            $textAlign="left"
-            $maxH={192}
-            $height="auto"
-            $overflowY="scroll"
-          >
-            <MenuItem
-              onClick={() => {
-                dispatch.call('resetZoom');
-                dispatch.call('rerender');
-                setShow(null);
-              }}
+          <ThemeProvider theme={uiSystem.theme}>
+            <Popover
+              onOutsideClick={() => setShow(null)}
+              $top={show.y}
+              $left={show.x}
+              $py={0.75}
+              $w={256}
+              $color={config.theme.popoverMenu.color}
+              showAngle={false}
+              $textAlign="left"
+              $maxH={192}
+              $height="auto"
+              $overflowY="scroll"
             >
-              Reset Chart
-            </MenuItem>
-            <Separator $my={0.5} />
-            <MenuItem
-              disabled={!hoverDrawing}
-              onClick={() => {
-                dispatch.call('removeDrawing', null, hoverDrawing);
-                setShow(null);
-              }}
-            >
-              Remove Drawing
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                dispatch.call('removeDrawings');
-                setShow(null);
-              }}
-            >
-              Remove Drawings
-            </MenuItem>
-          </Popover>
+              <MenuItem
+                onClick={() => {
+                  dispatch.call('resetZoom');
+                  dispatch.call('rerender');
+                  setShow(null);
+                }}
+              >
+                Reset Chart
+              </MenuItem>
+              <Separator $my={0.5} />
+              <MenuItem
+                disabled={!hoverDrawing}
+                onClick={() => {
+                  dispatch.call('removeDrawing', null, hoverDrawing);
+                  setShow(null);
+                }}
+              >
+                Remove Drawing
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  dispatch.call('removeDrawings');
+                  setShow(null);
+                }}
+              >
+                Remove Drawings
+              </MenuItem>
+            </Popover>
+          </ThemeProvider>
         </Html>
       )}
     </Layer>
