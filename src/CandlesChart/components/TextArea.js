@@ -19,7 +19,12 @@ export default function DrawingToolbar({
   const { text, textSize, points, color } = currentDrawing;
 
   return (
-    <Html divProps={{ style: { width: '100%' } }}>
+    <Html
+      divProps={{
+        style: { width: '100%' },
+        className: 'streamlined-chart-html',
+      }}
+    >
       <Div
         // ref={ref => {
         //   if (ref) {

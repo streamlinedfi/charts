@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@streamlinedfi/div": "^0.2.1",
+    "@streamlinedfi/div": "^0.2.3",
     "d3-dispatch": "^3.0.1",
     "konva": "^10.0.8",
     "moment": "^2.30.1",

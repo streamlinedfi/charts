@@ -49,7 +49,12 @@ export default function DrawingToolbar({
   const Icon = drawingIconMapping[currentDrawing.type];
 
   return (
-    <Html divProps={{ style: { width: '100%' } }}>
+    <Html
+      divProps={{
+        style: { width: '100%' },
+        className: 'streamlined-chart-html',
+      }}
+    >
       <ThemeProvider theme={uiSystem.theme}>
         <Div
           $flex

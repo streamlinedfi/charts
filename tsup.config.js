@@ -1,3 +1,4 @@
+import svgr from 'esbuild-plugin-svgr';
 import MomentTimezoneDataPlugin from 'moment-timezone-data-webpack-plugin';
 import { defineConfig } from 'tsup';
 
@@ -17,6 +18,17 @@ export default defineConfig({
     '.js': 'jsx',
   },
   esbuildPlugins: [
+    svgr({
+      svgo: true,
+      svgoConfig: {
+        plugins: [
+          {
+            name: 'removeViewBox',
+            active: false,
+          },
+        ],
+      },
+    }),
     {
       name: 'moment-timezone-data',
       setup(build) {

@@ -13,6 +13,7 @@ import OhlcvOverlay from './components/OhlcvOverlay';
 import WaterMarkOverlay from './components/WaterMarkOverlay';
 import XAxis from './components/XAxis';
 import YAxis from './components/YAxis';
+import GlobalStyle from './GlobalStyle';
 import createSetCursor from './modules/createSetCursor';
 import getRefs from './modules/getRefs';
 import isEqualProps from './modules/isEqualProps';
@@ -87,6 +88,7 @@ function Chart({
     if (!document.getElementById('streamlined-container')) {
       const container = document.createElement('div');
       container.id = 'streamlined-container';
+      container.className = 'streamlined-chart-html';
       document.body.appendChild(container);
     }
   }, []);
@@ -106,39 +108,42 @@ function Chart({
   }
 
   return (
-    <Stage
-      ref={getRefs(fwdRef, stageRef)}
-      width={config.width}
-      height={config.height}
-    >
-      <Context.Provider value={context}>
-        <Layer>
-          <Rect
-            x={0}
-            y={0}
-            width={config.width}
-            height={config.width}
-            cornerRadius={config.theme.borderRadius}
-            fill={config.theme.bgColor}
+    <>
+      <Stage
+        ref={getRefs(fwdRef, stageRef)}
+        width={config.width}
+        height={config.height}
+      >
+        <Context.Provider value={context}>
+          <Layer>
+            <Rect
+              x={0}
+              y={0}
+              width={config.width}
+              height={config.width}
+              cornerRadius={config.theme.borderRadius}
+              fill={config.theme.bgColor}
+            />
+          </Layer>
+          <Header
+            onTimeframeChange={onTimeframeChange}
+            onSymbolClick={onSymbolClick}
           />
-        </Layer>
-        <Header
-          onTimeframeChange={onTimeframeChange}
-          onSymbolClick={onSymbolClick}
-        />
-        <YAxis />
-        <XAxis />
-        <InnerChart />
-        <InnerChartDrawings onDrawings={onDrawings} />
-        <IndicatorWindows />
-        <Crosshair />
-        <OhlcvOverlay />
-        <MenusOverlay />
-        <WaterMarkOverlay loading={loading} />
-        <Dispatcher onLoadMore={onLoadMore} />
-        <Loader loading={loading} />
-      </Context.Provider>
-    </Stage>
+          <YAxis />
+          <XAxis />
+          <InnerChart />
+          <InnerChartDrawings onDrawings={onDrawings} />
+          <IndicatorWindows />
+          <Crosshair />
+          <OhlcvOverlay />
+          <MenusOverlay />
+          <WaterMarkOverlay loading={loading} />
+          <Dispatcher onLoadMore={onLoadMore} />
+          <Loader loading={loading} />
+        </Context.Provider>
+      </Stage>
+      <GlobalStyle theme={config.theme} />
+    </>
   );
 }
 

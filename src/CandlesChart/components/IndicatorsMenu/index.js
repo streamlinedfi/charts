@@ -1,7 +1,9 @@
 import Div from '@streamlinedfi/div';
 import React from 'react';
 import { createPortal } from 'react-dom';
+import { ThemeProvider } from 'styled-components';
 import { Screens } from '../../modules/indicators';
+import uiSystem from '../../modules/uiSystem';
 import Popover from '../react/Popover';
 import ATR from './ATR';
 import BB from './BB';
@@ -41,32 +43,34 @@ export default function IndicatorsPopover({
   return (
     typeof window !== 'undefined' &&
     createPortal(
-      <Div
-        $fixed
-        $cover
-        $z={config.theme.popoverMenu.zIndex - 1}
-        onClick={onOutsideClick}
-      >
+      <ThemeProvider theme={uiSystem.theme}>
         <Div
-          ref={floating}
-          style={{
-            position: strategy,
-            top: y ?? 0,
-            left: x ?? 0,
-            width: 360,
-          }}
+          $fixed
+          $cover
+          $z={config.theme.popoverMenu.zIndex - 1}
+          onClick={onOutsideClick}
         >
-          <Popover
-            y="bottom"
-            x="center"
-            yOffset={12}
-            $w={360}
-            onOutsideClick={onOutsideClick}
+          <Div
+            ref={floating}
+            style={{
+              position: strategy,
+              top: y ?? 0,
+              left: x ?? 0,
+              width: 360,
+            }}
           >
-            <Screen context={context} />
-          </Popover>
+            <Popover
+              y="bottom"
+              x="center"
+              yOffset={12}
+              $w={360}
+              onOutsideClick={onOutsideClick}
+            >
+              <Screen context={context} />
+            </Popover>
+          </Div>
         </Div>
-      </Div>,
+      </ThemeProvider>,
       document.getElementById('streamlined-container'),
     )
   );

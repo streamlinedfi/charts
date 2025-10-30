@@ -34,7 +34,12 @@ function Menu() {
   return (
     <Layer>
       {show && (
-        <Html divProps={{ style: { width: '100%' } }}>
+        <Html
+          divProps={{
+            style: { width: '100%' },
+            className: 'streamlined-chart-html',
+          }}
+        >
           <ThemeProvider theme={uiSystem.theme}>
             <Popover
               onOutsideClick={() => setShow(null)}

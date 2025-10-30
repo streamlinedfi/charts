@@ -62,6 +62,7 @@ export default {
     colors: Object.values(theme.colorMap),
     bgColor: theme.backgroundDarker,
     borderRadius: 10,
+    primary: theme.primary,
     lineColor: theme.primary,
     lineWidth: 1.5,
     lineCircleSize: 10,

@@ -32,8 +32,8 @@ const tools = {
   text: TextIcon,
 };
 
-const Test = styled.div`
-  ${props => console.log(props)}
+const StyledDiv = styled(Div)`
+  ${props => console.log('TCL: styled props', props, props.theme.spacing(1))};
 `;
 
 export default function HeaderToolbar({ onTimeframeChange }) {
@@ -76,9 +76,13 @@ export default function HeaderToolbar({ onTimeframeChange }) {
   const CurrentToolIcon = tools[config.tool];
 
   return (
-    <Html divProps={{ style: { width: '100%' } }}>
+    <Html
+      divProps={{
+        style: { width: '100%' },
+        className: 'streamlined-chart-html',
+      }}
+    >
       <ThemeProvider theme={uiSystem.theme}>
-        <Test />
         <Div $w="100%" $absolute>
           <Div
             $flex
@@ -139,6 +143,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
               ) : (
                 <>
                   <Div
+                    id="t"
                     $flex
                     as="button"
                     $shrink="0"
