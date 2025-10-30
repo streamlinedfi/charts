@@ -1,12 +1,12 @@
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
-import { useEffect } from 'react';
 import forEach from 'lodash/forEach';
-import last from 'lodash/last';
 import inRange from 'lodash/inRange';
-import useScales from '../modules/useScales';
+import last from 'lodash/last';
+import { useEffect } from 'react';
 import useContext from '../modules/useContext';
 import useRenderer from '../modules/useRenderer';
+import useScales from '../modules/useScales';
 import renderCandle from '../renderers/candle';
 
 const jstr = JSON.stringify;

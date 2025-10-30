@@ -73,8 +73,8 @@ function App() {
       <CandlesChart
         loading={loading}
         config={{
-          width: 600,
-          height: 400,
+          width: 960,
+          height: 560,
           symbol: {
             name: 'Bitcoin',
             code: 'BTC',

@@ -43,7 +43,7 @@ export default function Loader({
           $h={2}
           $radius={2}
           $background={color}
-          css={css`
+          $css={css`
             animation: ${load} 1s ease infinite;
           `}
         />

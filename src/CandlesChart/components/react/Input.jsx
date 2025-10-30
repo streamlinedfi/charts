@@ -7,34 +7,34 @@ import useContext from '../../modules/useContext';
 export const StyledField = styled.input`
   width: 100%;
   border-radius: 8px;
-  border: 1px solid ${props => props.bgColor};
-  background-color: ${props => props.bgColor};
+  border: 1px solid ${props => props.$bgColor};
+  background-color: ${props => props.$bgColor};
   box-shadow: inset 0 0 0 1px transparent;
   padding: 12px 16px;
   outline: 0;
   line-height: 20px;
   font-weight: 500;
   transition: all 0.2s;
-  color: ${props => props.color};
+  color: ${props => props.$color};
 
   ${props =>
     props.value
       ? css`
-          border-color: ${props.bgColor};
-          background-color: ${props.bgColor};
+          border-color: ${props.$bgColor};
+          background-color: ${props.$bgColor};
         `
       : css`
           &:not([readonly]):not(:focus):hover {
-            border-color: ${props.bgColorHover};
-            background-color: ${props.bgColorHover};
+            border-color: ${props.$bgColorHover};
+            background-color: ${props.$bgColorHover};
           }
         `}
 
   &.is-focused,
   &:not([readonly]):focus {
-    border-color: ${props => props.primary};
-    box-shadow: inset 0 0 0 1px ${props => transparentize(0.5, props.primary)};
-    background-color: ${props => props.bgColor};
+    border-color: ${props => props.$primary};
+    box-shadow: inset 0 0 0 1px ${props => transparentize(0.5, props.$primary)};
+    background-color: ${props => props.$bgColor};
   }
 
   &[readonly] {

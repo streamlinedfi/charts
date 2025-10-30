@@ -1,5 +1,5 @@
 import { dispatch as d3Dispatch } from 'd3-dispatch';
-import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+import React, { memo, useEffect, useMemo, useRef } from 'react';
 import InnerChartDrawings from './components/ChartDrawings';
 import Crosshair from './components/Crosshair';
 import Dispatcher from './components/Dispatcher';
@@ -60,7 +60,6 @@ function Chart({
     [],
   );
   const [config, setConfig] = useConfig(instanceConfig);
-  console.log('TCL: config', config);
   const data = useData(
     instanceData,
     config.initialCandlesWindow,
@@ -70,7 +69,6 @@ function Chart({
   );
   const frame = useFrame(config, data);
   const setCursor = createSetCursor(stageRef);
-  const [rerenderCount, setRerenderCount] = useState(0);
 
   useEffect(() => {
     if (typeof onFullscreen === 'function') {
@@ -83,12 +81,6 @@ function Chart({
       onConfig(config);
     }
   }, [jstr(config)]);
-
-  // useEffect(() => {
-  //   dispatch.on('rerender', () => {
-  //     setRerenderCount(prev => prev + 1);
-  //   });
-  // }, [dispatch]);
 
   useEffect(() => {
     // create container if it doesn't exist
