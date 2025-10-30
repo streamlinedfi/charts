@@ -1,7 +1,0 @@
-<svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect y="2" width="16" height="6" fill="currentColor" opacity="0.3" />
-<line x1="0.5" y1="2" x2="15.5" y2="2" stroke="currentColor" stroke-linecap="round"/>
-<circle cx="8" cy="2" r="1.5" fill="#1D222D" stroke="currentColor"/>
-<line x1="0.5" y1="8" x2="15.5" y2="8" stroke="currentColor" stroke-linecap="round"/>
-<circle cx="8" cy="8" r="1.5" fill="#1D222D" stroke="currentColor"/>
-</svg>
