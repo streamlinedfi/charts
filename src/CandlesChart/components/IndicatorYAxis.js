@@ -38,7 +38,7 @@ function renderTick({ frame, config, value, y }) {
         fontFamily: config.theme.fontFamily,
         fontWeight: config.theme.fontWeight,
         fontSize: config.theme.axes.fontSize,
-        text: config.formatters.axes.y(value),
+        text: config.formatters.axes.y(value, config.decimals),
         fill: config.theme.axes.color,
         x:
           frame.yAxis.xStart +
@@ -76,7 +76,7 @@ function YAxis() {
   //               scales.y.domain()[0],
   //               last(scales.y.domain()),
   //             ),
-  //           value: config.formatters.axes.y(tick.value),
+  //           value: config.formatters.axes.y(tick.value, config.decimals),
   //           y: tick.y,
   //         });
   //         tickKeys[key] = key;
@@ -105,7 +105,7 @@ function YAxis() {
   //         key: 'lastClose',
   //         y: lastY,
   //         show: inRange(lastY, frame.yAxis.yStart, frame.yAxis.yEnd),
-  //         text: config.formatters.axes.y(lastEntry.close),
+  //         text: config.formatters.axes.y(lastEntry.close, config.decimals),
   //         fill,
   //       });
   //     });

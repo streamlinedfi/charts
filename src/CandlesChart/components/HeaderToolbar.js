@@ -5,7 +5,7 @@ import { AngleDown } from '@styled-icons/fa-solid/AngleDown';
 import { transparentize } from 'polished';
 import React, { useState } from 'react';
 import { Html } from 'react-konva-utils';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import Crosshair from '../assets/crosshair.svg';
 import HArea from '../assets/harea.svg';
 import HLine from '../assets/hline.svg';
@@ -31,10 +31,6 @@ const tools = {
   vline: VLine,
   text: TextIcon,
 };
-
-const StyledDiv = styled(Div)`
-  ${props => console.log('TCL: styled props', props, props.theme.spacing(1))};
-`;
 
 export default function HeaderToolbar({ onTimeframeChange }) {
   const context = useContext();
@@ -187,93 +183,37 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                       showAngle={false}
                       $textAlign="left"
                     >
-                      <Text
-                        $size={13}
-                        $weight={600}
-                        $color={config.theme.popoverMenu.uppercaseColor}
-                        $uppercase
-                        $mt={0}
-                        $mb={0.5}
-                      >
-                        Minute
-                      </Text>
-                      <Div $flex $mb={1.5}>
-                        {config.timeframes
-                          .filter(td => /^M/.test(td.id))
-                          .map(tf => (
-                            <Button
-                              active={tf.id === currentTimeframe.id}
-                              size="small"
-                              rounded
-                              key={tf.id}
-                              $mr={0.5}
-                              onClick={() => {
-                                onTimeframeChange(tf);
-                                setShowTimeframes(false);
-                              }}
-                            >
-                              {tf.text}
-                            </Button>
-                          ))}
-                      </Div>
-                      <Text
-                        $size={13}
-                        $weight={600}
-                        $color={config.theme.popoverMenu.uppercaseColor}
-                        $uppercase
-                        $mt={0}
-                        $mb={0.5}
-                      >
-                        Hour
-                      </Text>
-                      <Div $flex $mb={1.5}>
-                        {config.timeframes
-                          .filter(td => /^H/.test(td.id))
-                          .map(tf => (
-                            <Button
-                              active={tf.id === currentTimeframe.id}
-                              size="small"
-                              rounded
-                              key={tf.id}
-                              $mr={0.5}
-                              onClick={() => {
-                                onTimeframeChange(tf);
-                                setShowTimeframes(false);
-                              }}
-                            >
-                              {tf.text}
-                            </Button>
-                          ))}
-                      </Div>
-                      <Text
-                        $size={13}
-                        $weight={600}
-                        $color={config.theme.popoverMenu.uppercaseColor}
-                        $uppercase
-                        $mt={0}
-                        $mb={0.5}
-                      >
-                        Day/Week
-                      </Text>
-                      <Div $flex>
-                        {config.timeframes
-                          .filter(td => /^(D|W)/.test(td.id))
-                          .map(tf => (
-                            <Button
-                              active={tf.id === currentTimeframe.id}
-                              size="small"
-                              rounded
-                              key={tf.id}
-                              $mr={0.5}
-                              onClick={() => {
-                                onTimeframeChange(tf);
-                                setShowTimeframes(false);
-                              }}
-                            >
-                              {tf.text}
-                            </Button>
-                          ))}
-                      </Div>
+                      {entries(config.timeframesMenu).map(([key, values]) => (
+                        <div key={key}>
+                          <Text
+                            $size={13}
+                            $weight={600}
+                            $color={config.theme.popoverMenu.uppercaseColor}
+                            $uppercase
+                            $mt={0}
+                            $mb={0.5}
+                          >
+                            {key}
+                          </Text>
+                          <Div $flex $mb={1.5}>
+                            {values.map(tf => (
+                              <Button
+                                active={tf.id === currentTimeframe.id}
+                                size="small"
+                                rounded
+                                key={tf.id}
+                                $mr={0.5}
+                                onClick={() => {
+                                  onTimeframeChange(tf);
+                                  setShowTimeframes(false);
+                                }}
+                              >
+                                {tf.text}
+                              </Button>
+                            ))}
+                          </Div>
+                        </div>
+                      ))}
                     </Popover>
                   )}
                 </>

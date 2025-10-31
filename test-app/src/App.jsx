@@ -1,11 +1,7 @@
 import { CandlesChart } from '@streamlinedfi/charts';
 import Div from '@streamlinedfi/div';
-import round from 'lodash/round';
-import moment from 'moment';
 import { useEffect, useState } from 'react';
 import data from './data';
-console.log('TCL: data', data);
-console.log('TCL: CandlesChart', CandlesChart);
 
 const { values } = Object;
 
@@ -60,7 +56,6 @@ function App() {
   const [fullscreen, setFullscreen] = useState(false);
   const [timeframe, setTimeframe] = useState(timeframes.D1);
   const [config, setConfig] = useState({});
-  console.log('TCL: App -> config', config);
 
   useEffect(() => {
     setTimeout(() => {
@@ -70,9 +65,6 @@ function App() {
 
   return (
     <Div $h="100%" $background={theme => theme.background} $flex $innerCenter>
-      <Div $w={100} $h={100} $px={1} $background="red">
-        <Div $w={100} $h={100} $background="blue" />
-      </Div>
       <CandlesChart
         loading={loading}
         config={{
@@ -82,21 +74,27 @@ function App() {
             name: 'Bitcoin',
             code: 'BTC',
           },
+          decimals: 4,
           symbolClick: true,
           fullscreen,
           showFullscreenButton: false,
           initialCandlesWindow: defaultRequestBars,
           timeframe,
           timeframes: values(timeframes),
-          formatters: {
-            axes: {
-              x: value => moment(value).format('D MMM'),
-              y: value => round(value, decimals),
-            },
-            crosshair: {
-              y: value => round(value, decimals),
-            },
+          timeframesMenu: {
+            Minute: [timeframes.M15, timeframes.M30],
+            Hour: [timeframes.H1, timeframes.H4],
+            'Day/Week': [timeframes.D1, timeframes.W1],
           },
+          // formatters: {
+          //   axes: {
+          //     x: value => moment(value).format('D MMM'),
+          //     y: value => round(value, decimals),
+          //   },
+          //   crosshair: {
+          //     y: value => round(value, decimals),
+          //   },
+          // },
           // ...config,
         }}
         onConfig={setConfig}

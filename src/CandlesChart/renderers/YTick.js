@@ -32,7 +32,7 @@ function renderTick({ frame, config, value, y, showLine = true }) {
         fontFamily: config.theme.fontFamily,
         fontStyle: config.theme.fontStyle,
         fontSize: config.theme.axes.fontSize,
-        text: config.formatters.axes.y(value),
+        text: config.formatters.axes.y(value, config.decimals),
         fill: config.theme.axes.color,
         x:
           frame.yAxis.xStart +

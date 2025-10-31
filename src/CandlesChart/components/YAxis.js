@@ -1,13 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react';
-import inRange from 'lodash/inRange';
 import forEach from 'lodash/forEach';
+import inRange from 'lodash/inRange';
 import last from 'lodash/last';
-import { Layer } from './konva';
+import React, { useRef } from 'react';
 import useContext from '../modules/useContext';
 import useRenderer from '../modules/useRenderer';
 import useScales from '../modules/useScales';
 import renderYTick from '../renderers/YTick';
 import renderActiveYTick from '../renderers/activeYTick';
+import { Layer } from './konva';
 
 function YAxis() {
   const { config, data, frame } = useContext();
@@ -33,7 +33,7 @@ function YAxis() {
         renderer(renderYTick, {
           key,
           show,
-          value: config.formatters.axes.y(tick.value),
+          value: config.formatters.axes.y(tick.value, config.decimals),
           y: tick.y,
         });
         tickKeys[key] = key;
@@ -63,7 +63,7 @@ function YAxis() {
         key: 'lastClose',
         y: lastY,
         show: inRange(lastY, frame.yAxis.yStart, frame.yAxis.yEnd),
-        text: config.formatters.axes.y(lastEntry.close),
+        text: config.formatters.axes.y(lastEntry.close, config.decimals),
         fill,
       });
     };

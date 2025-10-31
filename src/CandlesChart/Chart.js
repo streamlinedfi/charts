@@ -1,5 +1,6 @@
 import { dispatch as d3Dispatch } from 'd3-dispatch';
 import React, { memo, useEffect, useMemo, useRef } from 'react';
+import ChartStyle from './ChartStyle';
 import InnerChartDrawings from './components/ChartDrawings';
 import Crosshair from './components/Crosshair';
 import Dispatcher from './components/Dispatcher';
@@ -13,7 +14,6 @@ import OhlcvOverlay from './components/OhlcvOverlay';
 import WaterMarkOverlay from './components/WaterMarkOverlay';
 import XAxis from './components/XAxis';
 import YAxis from './components/YAxis';
-import GlobalStyle from './GlobalStyle';
 import createSetCursor from './modules/createSetCursor';
 import getRefs from './modules/getRefs';
 import isEqualProps from './modules/isEqualProps';
@@ -109,7 +109,7 @@ function Chart({
 
   return (
     <>
-      <GlobalStyle theme={config.theme} />
+      <ChartStyle theme={config.theme} />
       <Stage
         ref={getRefs(fwdRef, stageRef)}
         width={config.width}

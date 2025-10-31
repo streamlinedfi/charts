@@ -45,15 +45,15 @@ function renderOverlay({ config, frame, candle }) {
     Math.ceil(
       Math.max(
         new Konva.Text({
-          text: config.formatters.axes.y(candle.high),
+          text: config.formatters.axes.y(candle.high, config.decimals),
           ...keyTextProps,
         }).getTextWidth(),
         new Konva.Text({
-          text: config.formatters.axes.y(candle.low),
+          text: config.formatters.axes.y(candle.low, config.decimals),
           ...keyTextProps,
         }).getTextWidth(),
         // new Konva.Text({
-        //   text: config.formatters.axes.y(candle.volume),
+        //   text: config.formatters.axes.y(candle.volume, config.decimals),
         //   ...keyTextProps,
         // }).getTextWidth(),
       ),
@@ -68,15 +68,15 @@ function renderOverlay({ config, frame, candle }) {
     Math.ceil(
       Math.max(
         new Konva.Text({
-          text: config.formatters.axes.y(candle.open),
+          text: config.formatters.axes.y(candle.open, config.decimals),
           ...keyTextProps,
         }).getTextWidth(),
         new Konva.Text({
-          text: config.formatters.axes.y(candle.high),
+          text: config.formatters.axes.y(candle.high, config.decimals),
           ...keyTextProps,
         }).getTextWidth(),
         // new Konva.Text({
-        //   text: config.formatters.axes.y(candle.volume),
+        //   text: config.formatters.axes.y(candle.volume, config.decimals),
         //   ...keyTextProps,
         // }).getTextWidth(),
       ),
@@ -115,7 +115,7 @@ function renderOverlay({ config, frame, candle }) {
     {
       type: 'Text',
       attrs: {
-        text: config.formatters.axes.y(candle.high),
+        text: config.formatters.axes.y(candle.high, config.decimals),
         x: xStartCol1Value,
         y: yStartRow1,
         ...valueTextProps,
@@ -133,7 +133,7 @@ function renderOverlay({ config, frame, candle }) {
     {
       type: 'Text',
       attrs: {
-        text: config.formatters.axes.y(candle.low),
+        text: config.formatters.axes.y(candle.low, config.decimals),
         x: xStartCol1Value,
         y: yStartRow2,
         ...valueTextProps,
@@ -170,7 +170,7 @@ function renderOverlay({ config, frame, candle }) {
     {
       type: 'Text',
       attrs: {
-        text: config.formatters.axes.y(candle.open),
+        text: config.formatters.axes.y(candle.open, config.decimals),
         x: xStartCol2Value,
         y: yStartRow1,
         ...valueTextProps,
@@ -188,7 +188,7 @@ function renderOverlay({ config, frame, candle }) {
     {
       type: 'Text',
       attrs: {
-        text: config.formatters.axes.y(candle.close),
+        text: config.formatters.axes.y(candle.close, config.decimals),
         x: xStartCol2Value,
         y: yStartRow2,
         ...valueTextProps,

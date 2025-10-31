@@ -1,4 +1,4 @@
-import { format as formatNumber } from 'friendly-numbers';
+import round from 'lodash/round';
 import moment from 'moment-timezone';
 import { tint, transparentize } from 'polished';
 import { Indicators, createDefaultIndicatorConfigs } from './indicators';
@@ -36,15 +36,16 @@ export default {
   title: '',
   xKey: 'x',
   yKey: 'y',
+  decimals: 2,
   formatters: {
     axes: {
       x: value => moment.tz(value, 'America/New_York').format('MMM ’YY'),
-      y: value => formatNumber(value, { formattedDecimals: 2 }),
+      y: (value, decimals) => round(value, decimals).toFixed(decimals),
     },
     crosshair: {
       x: value =>
         moment.tz(value, 'America/New_York').format('D MMM ’YY HH:mm'),
-      y: value => formatNumber(value, { formattedDecimals: 2 }),
+      y: (value, decimals) => round(value, decimals).toFixed(decimals),
     },
   },
   tool: 'crosshair',

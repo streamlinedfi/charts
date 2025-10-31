@@ -42,15 +42,17 @@ function getFrame(config, data) {
 
   let lastEntryWidth = 0;
   if (data.series) {
-    const lastClose = last(data.series).close;
+    const lastClose = config.formatters.axes.y(
+      last(data.series).close,
+      config.decimals,
+    );
     const lastCloseChars = String(lastClose).length;
     const textWidth = new Konva.Text({
-      text: config.formatters.axes.y(
-        Array(lastCloseChars)
-          .fill('0')
-          .join(''),
-      ),
+      text: Array(lastCloseChars)
+        .fill('0')
+        .join(''),
       fontFamily: theme.axes.fontFamily || theme.fontFamily,
+      fontWeight: theme.axes.fontWeight || theme.fontWeight,
       fontSize: theme.axes.fontSize,
     }).getTextWidth();
 
@@ -62,7 +64,7 @@ function getFrame(config, data) {
     theme.axes.tickSize +
     theme.axes.tickMargin +
     lastEntryWidth +
-    theme.axes.tickMargin * 2;
+    theme.axes.tickMargin;
 
   const xSize =
     theme.axes.tickSize + theme.axes.tickMargin + theme.axes.fontSize;
