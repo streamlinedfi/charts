@@ -2,6 +2,8 @@
 
 Charting Library with Financial Candlesticks Chart that provides an alternative to TradingView
 
+![Screenshot of Streamlined Charts](./screenshot.png)
+
 ## Installation
 
 ```

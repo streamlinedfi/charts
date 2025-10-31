@@ -69,8 +69,8 @@ function App() {
           width: 960,
           height: 560,
           symbol: {
-            name: 'Bitcoin',
-            code: 'BTC',
+            name: 'S&P 500',
+            code: 'SPY',
           },
           decimals: 2,
           symbolClick: true,
