@@ -1,16 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import { Layer, Image, Rect } from './konva';
 import { transparentize } from 'polished';
+import React from 'react';
 import useImage from 'use-image';
+import logoSvg from '../assets/logo-chart.inline';
 import useContext from '../modules/useContext';
+import { Image, Layer, Rect } from './konva';
 
 function WaterMarkOverlay({ loading }) {
   const { frame, config } = useContext();
-  const [image, status] = useImage(
-    '/assets/logo-chart.svg',
-    'anonymous',
-    'origin',
-  );
+  const [image, status] = useImage(logoSvg);
 
   const imagePadding = 4;
 

@@ -64,6 +64,7 @@ function Pointer() {
   const deltaRef = useRef();
   const [hoverX, setHoverX] = useState();
   const [hoverY, setHoverY] = useState();
+  const imagePadding = 4;
 
   const onPointerDown = ({ evt }) => {
     dispatch.call('pointerdown', null, evt);
@@ -179,6 +180,24 @@ function Pointer() {
             dispatch.call('dragX', null, { evt, dx: deltaRef.current.deltaX });
             deltaRef.current.initX = evt.offsetX;
           }
+        }}
+        transformsEnabled="position"
+        perfectDrawEnabled={false}
+      />
+      <Rect
+        key={jstr(frame.mainChart)}
+        x={frame.mainChart.xStart}
+        y={frame.mainChart.yEnd - imagePadding * 3 - 28}
+        width={103 + imagePadding}
+        height={28 + imagePadding * 2}
+        onMouseEnter={() => {
+          setCursor('pointer');
+        }}
+        onMouseLeave={() => {
+          setCursor('default');
+        }}
+        onPointerDown={({ evt }) => {
+          window.open('https://www.streamlined.finance', '_blank');
         }}
         transformsEnabled="position"
         perfectDrawEnabled={false}

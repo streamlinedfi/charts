@@ -1,4 +1,5 @@
 import svgr from 'esbuild-plugin-svgr';
+import { readFileSync } from 'fs';
 import MomentTimezoneDataPlugin from 'moment-timezone-data-webpack-plugin';
 import { defineConfig } from 'tsup';
 
@@ -18,6 +19,20 @@ export default defineConfig({
     '.js': 'jsx',
   },
   esbuildPlugins: [
+    {
+      name: 'inline-svg-dataurl',
+      setup(build) {
+        build.onLoad({ filter: /\.inline$/ }, async args => {
+          const svg = readFileSync(args.path, 'utf8');
+          const base64 = Buffer.from(svg).toString('base64');
+          const dataUrl = `data:image/svg+xml;base64,${base64}`;
+          return {
+            contents: `export default "${dataUrl}"`,
+            loader: 'js',
+          };
+        });
+      },
+    },
     svgr({
       svgo: true,
       svgoConfig: {
