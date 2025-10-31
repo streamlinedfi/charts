@@ -31,11 +31,16 @@ function IndicatorItem({
         <Text
           $size={13}
           $color={config.theme.indicatorsMenu.indicatorTextColor}
+          $m={0}
           $mr={0.5}
         >
           {indicatorTextMapping[indicator.indicator] || indicator.indicator}
         </Text>
-        <Text $size={13} $color={config.theme.indicatorsMenu.settingsColor}>
+        <Text
+          $m={0}
+          $size={13}
+          $color={config.theme.indicatorsMenu.settingsColor}
+        >
           {[
             indicator.length,
             indicator.type,
@@ -55,12 +60,15 @@ function IndicatorItem({
         <Text
           as="button"
           $size={13}
+          $fontWeight={config.theme.fontWeight}
           $color={
             indicator.active
               ? config.theme.indicatorsMenu.settingsColorActive
               : config.theme.indicatorsMenu.settingsColor
           }
           $mr={0.5}
+          $border="0"
+          $background="none"
           onClick={() => setScreen(indicator)}
         >
           Settings
@@ -76,7 +84,12 @@ function IndicatorItem({
         {hasDuplicates && (
           <Div $w={24}>
             {setRemove && (
-              <Div as="button" onClick={setRemove}>
+              <Div
+                as="button"
+                $border="0"
+                $background="none"
+                onClick={setRemove}
+              >
                 <Div
                   as={PlusIcon}
                   $w={20}
@@ -165,7 +178,12 @@ export default function IndicatorsScreen({ context }) {
             Main chart
           </Text>
           <Div $relative $mobile$left={8} $mobile$top={-1}>
-            <Div as="button" onClick={() => setShowAddMenu(true)}>
+            <Div
+              as="button"
+              $border="0"
+              $background="none"
+              onClick={() => setShowAddMenu(true)}
+            >
               <Div
                 as={PlusIcon}
                 $w={20}

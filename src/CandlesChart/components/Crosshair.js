@@ -1,13 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import Konva from 'konva';
 import inRange from 'lodash/inRange';
 import moment from 'moment-timezone';
-import Konva from 'konva';
-import { Layer } from './konva';
+import React, { useEffect, useRef } from 'react';
 import useContext from '../modules/useContext';
 import useRenderer from '../modules/useRenderer';
 import useScales from '../modules/useScales';
 import renderYTick from '../renderers/activeYTick';
-import { getIndicatorYScale } from '../modules/indicators';
+import { Layer } from './konva';
 
 const jstr = JSON.stringify;
 const { values } = Object;
@@ -15,7 +14,7 @@ const { values } = Object;
 function renderCrosshair({ config, frame, x, y, candle }) {
   const textAttrs = {
     fontFamily: config.theme.fontFamily,
-    fontStyle: config.theme.fontStyle,
+    fontWeight: config.theme.fontWeight,
     fontSize: config.theme.axes.fontSize,
     // text: config.formatters.crosshair.x(candle?.time),
     text: moment

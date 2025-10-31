@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
 import Konva from 'konva';
-import { Group, Rect, Line, Image } from './konva';
+import React, { useState } from 'react';
 import useImage from 'use-image';
 import useContext from '../modules/useContext';
+import { Group, Image, Rect } from './konva';
 import Text from './Text';
-import AngleDown from './AngleDown';
 // import Rectangle from '../assets/rectangle.svg';
 
 const timeframeButtons = [
@@ -117,7 +116,7 @@ function Button({
       text,
       fontFamily: config.theme.fontFamily,
       fontSize: fontSize || config.theme.header.buttonFontSize,
-      fontStyle: 500,
+      fontWeight: 500,
     }).getTextWidth();
 
   return (

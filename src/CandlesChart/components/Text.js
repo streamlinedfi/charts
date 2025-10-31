@@ -10,7 +10,7 @@ function Text({ getWidth, ...props }, parentRef) {
   const textProps = {
     fontFamily: config.theme.fontFamily,
     fontSize: config.theme.fontSize,
-    fontStyle: config.theme.fontStyle,
+    fontWeight: config.theme.fontWeight,
     fill: config.theme.color,
     ...removeNilDeep(props),
   };

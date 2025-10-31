@@ -14,6 +14,7 @@ export default function FieldInput({ label = 'Thickness', value, setValue }) {
       <Text
         $size={13}
         $color={config.theme.indicatorsMenu.labelColor}
+        $mt={0}
         $mb={0.5}
       >
         {label}

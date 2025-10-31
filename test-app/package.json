@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@streamlinedfi/charts": "^0.1.1",
     "@streamlinedfi/div": "^0.2.3",
     "d3-dispatch": "^3.0.1",
     "konva": "^10.0.8",
@@ -26,6 +27,7 @@
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
+    "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",

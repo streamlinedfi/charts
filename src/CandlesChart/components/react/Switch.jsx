@@ -15,6 +15,7 @@ export default function Switch({
   return (
     <Div
       as="button"
+      $border="0"
       $relative
       $w={outerWidth}
       $radius={21}

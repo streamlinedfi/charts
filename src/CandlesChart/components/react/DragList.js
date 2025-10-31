@@ -8,7 +8,7 @@ import useContext from '../../modules/useContext';
 const LineStyle = createGlobalStyle`
   .drag-list-line {
     z-index: ${props => props.zIndex} !important;
-    border: 1px solid  ${props => props.theme.primary} !important;
+    border: 1px solid  ${props => props.borderColor} !important;
   }
 `;
 
@@ -59,7 +59,10 @@ export default function DragList({ children, listItems, onDragEnd }) {
       lineClassName="drag-list-line"
     >
       {children}
-      <LineStyle zIndex={config.theme.dragList.topZIndex} />
+      <LineStyle
+        zIndex={config.theme.dragList.topZIndex}
+        borderColor={config.theme.primary}
+      />
     </ReactDragListView>
   );
 }

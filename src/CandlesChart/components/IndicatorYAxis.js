@@ -1,12 +1,7 @@
-import React, { useRef, useEffect } from 'react';
-import { Layer } from './konva';
-import inRange from 'lodash/inRange';
-import forEach from 'lodash/forEach';
-import last from 'lodash/last';
+import { useRef } from 'react';
 import useContext from '../modules/useContext';
 import useRenderer from '../modules/useRenderer';
 import useScales from '../modules/useScales';
-import renderYTick from '../renderers/YTick';
 
 const jstr = JSON.stringify;
 
@@ -41,7 +36,7 @@ function renderTick({ frame, config, value, y }) {
       type: 'Text',
       attrs: {
         fontFamily: config.theme.fontFamily,
-        fontStyle: config.theme.fontStyle,
+        fontWeight: config.theme.fontWeight,
         fontSize: config.theme.axes.fontSize,
         text: config.formatters.axes.y(value),
         fill: config.theme.axes.color,

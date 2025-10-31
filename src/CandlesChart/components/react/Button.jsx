@@ -67,6 +67,7 @@ function Button(
         ? transparentize(0.5, config.theme.button.borderColorActive)
         : 'transparent'
     }`,
+    $background: 'none',
     $color: active
       ? config.theme.button.colorActive
       : config.theme.button.color,
@@ -87,7 +88,7 @@ function Button(
       $radius={rounded ? height / 2 : 8}
       $px={px}
       $fontSize={fontSize}
-      $fontWeight={fontWeight}
+      $fontWeight={fontWeight || config.theme.fontWeight}
       $cursor={disabled ? 'default' : 'pointer'}
       onClick={disabled ? undefined : onClick}
       {...styleProps}

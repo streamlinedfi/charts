@@ -89,10 +89,10 @@ export default function DrawingToolbar({
               $h={16}
               $mr={0.5}
               $radius={8}
-              $background={color === colorOption ? color : undefined}
+              $background={color === colorOption ? color : 'none'}
               $background$hover={
                 color === colorOption
-                  ? undefined
+                  ? 'none'
                   : transparentize(0.5, colorOption)
               }
               $border={`1.5px solid ${colorOption}`}
@@ -119,8 +119,9 @@ export default function DrawingToolbar({
                   $background={
                     textSize === size
                       ? config.theme.drawingToolbar.textBgColor
-                      : undefined
+                      : 'none'
                   }
+                  $border="0"
                   onClick={() => setTextSize(size)}
                 >
                   <Div as={Aa} $transform={`scale(${scaleMapping[size]})`} />
@@ -132,6 +133,7 @@ export default function DrawingToolbar({
             size={24}
             $position="static"
             $background={config.theme.drawingToolbar.closeBgColor}
+            $color={config.theme.drawingToolbar.closeColor}
             onClick={() => onRemove(currentDrawing)}
           />
         </Div>

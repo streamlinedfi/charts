@@ -33,6 +33,8 @@ export default function Indicator({
         $px={1}
         $flex
         $mb={1.25}
+        $border="0"
+        $background="none"
         onClick={() =>
           setConfig({
             ...config,
@@ -44,7 +46,7 @@ export default function Indicator({
         }
       >
         <Div as={ChevronLeft} $w={16} $color={config.theme.primary} />
-        <Text $size={13} $lineH={16} $color={config.theme.primary}>
+        <Text $size={13} $lineH={16} $m={0} $color={config.theme.primary}>
           Indicators
         </Text>
       </Div>
@@ -54,6 +56,7 @@ export default function Indicator({
           $lineH={30}
           $weight={600}
           $color={config.theme.indicatorsMenu.titleColor}
+          $mt={0}
           $mb={1.375}
         >
           {indicator.indicator}
@@ -68,7 +71,9 @@ export default function Indicator({
         <Div $flex $spaceBetween $mb={0.5}>
           <Text
             $px={1.25}
+            $m={0}
             $size={13}
+            $fontWeight={config.theme.fontWeight}
             $color={config.theme.indicatorsMenu.settingsColor}
           >
             Settings
@@ -76,8 +81,12 @@ export default function Indicator({
           <Text
             as="button"
             $px={1.25}
+            $m={0}
             $size={13}
             $color={config.theme.indicatorsMenu.settingsColor}
+            $fontWeight={config.theme.fontWeight}
+            $border="0"
+            $background="none"
             onClick={() => {
               const { active, ...defaults } = config.indicators.defaultConfig[
                 indicator.indicator

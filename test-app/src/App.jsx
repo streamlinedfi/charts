@@ -70,6 +70,9 @@ function App() {
 
   return (
     <Div $h="100%" $background={theme => theme.background} $flex $innerCenter>
+      <Div $w={100} $h={100} $px={1} $background="red">
+        <Div $w={100} $h={100} $background="blue" />
+      </Div>
       <CandlesChart
         loading={loading}
         config={{

@@ -125,6 +125,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                     $h={32}
                     $radius={16}
                     $fontSize={13}
+                    $fontWeight={config.theme.fontWeight}
                     $color={
                       currentTimeframe.id === tf.id
                         ? config.theme.header.buttonColorActive
@@ -133,8 +134,9 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                     $background={
                       currentTimeframe.id === tf.id
                         ? config.theme.header.buttonBgColorActive
-                        : undefined
+                        : 'none'
                     }
+                    $border="0"
                     onClick={() => onTimeframeChange(tf)}
                   >
                     {tf.text}
@@ -152,6 +154,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                     $px={0.75}
                     $radius={16}
                     $fontSize={13}
+                    $fontWeight={config.theme.fontWeight}
                     $color={
                       showTimeframes
                         ? config.theme.header.buttonColorActive
@@ -165,6 +168,8 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                           )
                         : 'transparent'
                     }`}
+                    $background="none"
+                    $border="0"
                     onClick={() => setShowTimeframes(!showTimeframes)}
                   >
                     <Div as="span" $mr={0.25}>
@@ -187,6 +192,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                         $weight={600}
                         $color={config.theme.popoverMenu.uppercaseColor}
                         $uppercase
+                        $mt={0}
                         $mb={0.5}
                       >
                         Minute
@@ -215,6 +221,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                         $weight={600}
                         $color={config.theme.popoverMenu.uppercaseColor}
                         $uppercase
+                        $mt={0}
                         $mb={0.5}
                       >
                         Hour
@@ -243,6 +250,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                         $weight={600}
                         $color={config.theme.popoverMenu.uppercaseColor}
                         $uppercase
+                        $mt={0}
                         $mb={0.5}
                       >
                         Day/Week
@@ -315,8 +323,9 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                       $background={
                         config.tool === tool
                           ? config.theme.header.buttonBgColorActive
-                          : undefined
+                          : 'none'
                       }
+                      $border="0"
                       onClick={() => setTool(tool)}
                       aria-label={tool}
                     >
@@ -339,6 +348,8 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                           ? config.theme.header.buttonColorActive
                           : config.theme.header.buttonColor
                       }
+                      $background="none"
+                      $border="0"
                       onClick={() => setShowTools(!showTools)}
                     >
                       <Div as={CurrentToolIcon} $mr={0.25} />
@@ -359,6 +370,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                           $weight={600}
                           $color={config.theme.popoverMenu.uppercaseColor}
                           $uppercase
+                          $mt={0}
                           $mb={0.5}
                           $center
                         >
@@ -404,6 +416,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                 $radius={17}
                 $px={0.75}
                 $fontSize={13}
+                $fontWeight={config.theme.fontWeight}
                 $color={
                   config.indicators.showMenu
                     ? config.theme.header.buttonColorActive
@@ -433,12 +446,13 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                 $flex
                 $innerCenter
                 $w="auto"
-                $border={`1px solid ${config.theme.header.buttonBorderColor}`}
+                $border={config.theme.header.buttonBorderColor}
                 $background={config.theme.header.background}
                 $h={34}
                 $radius={17}
                 $px={0.75}
                 $fontSize={13}
+                $fontWeight={config.theme.fontWeight}
                 $color={config.theme.header.buttonColor}
                 $mr={0.5}
                 onClick={downloadScreenshot}
@@ -452,7 +466,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
                 $flex
                 $innerCenter
                 $w="auto"
-                $border={`1px solid ${config.theme.header.buttonBorderColor}`}
+                $border={config.theme.header.buttonBorderColor}
                 $background={config.theme.header.background}
                 $h={34}
                 $radius={17}

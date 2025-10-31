@@ -109,6 +109,7 @@ function Chart({
 
   return (
     <>
+      <GlobalStyle theme={config.theme} />
       <Stage
         ref={getRefs(fwdRef, stageRef)}
         width={config.width}
@@ -142,7 +143,6 @@ function Chart({
           <Loader loading={loading} />
         </Context.Provider>
       </Stage>
-      <GlobalStyle theme={config.theme} />
     </>
   );
 }

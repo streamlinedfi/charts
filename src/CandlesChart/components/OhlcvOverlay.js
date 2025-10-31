@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { transparentize } from 'polished';
-import last from 'lodash/last';
 import Konva from 'konva';
-import { Layer } from './konva';
+import last from 'lodash/last';
+import { transparentize } from 'polished';
+import React, { useEffect, useRef } from 'react';
 import useContext from '../modules/useContext';
 import useRenderer from '../modules/useRenderer';
+import { Layer } from './konva';
 
 function renderOverlay({ config, frame, candle }) {
   const overlayTheme = config.theme.ohlcvOverlay;
@@ -17,13 +17,13 @@ function renderOverlay({ config, frame, candle }) {
 
   const keyTextProps = {
     fontFamily: config.theme.fontFamily,
-    fontStyle: config.theme.fontStyle,
+    fontWeight: config.theme.fontWeight,
     fontSize: overlayTheme.fontSize,
     fill: overlayTheme.keyColor,
   };
   const valueTextProps = {
     fontFamily: config.theme.fontFamily,
-    fontStyle: config.theme.fontStyle,
+    fontWeight: config.theme.fontWeight,
     fontSize: overlayTheme.fontSize,
     fill: overlayTheme.valueColor,
   };

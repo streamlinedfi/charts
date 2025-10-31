@@ -53,6 +53,7 @@ export default function PopoverMenu({
               $mx={0.5}
             >
               <Text
+                $m={0}
                 $size={12}
                 $weight={600}
                 $color={config.theme.popoverMenu.uppercaseColor}

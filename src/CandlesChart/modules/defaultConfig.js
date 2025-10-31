@@ -70,7 +70,7 @@ export default {
     candleDownColor: theme.redCandle,
     fontFamily: theme.fontFamily,
     fontSize: 14,
-    fontStyle: 500,
+    fontWeight: 500,
     color: theme.fill600,
     padding: [20, 24, 24, 24],
     title: {
@@ -93,7 +93,7 @@ export default {
       buttonFontSize: 13,
       buttonColor: theme.fill500,
       buttonColorHover: theme.fill800,
-      buttonColorActive: theme.fill800,
+      buttonColorActive: theme.primary,
       buttonBgColorActive: theme.fill100,
       buttonBorderColor: theme.fill300,
       buttonBorderColorActive: theme.primary,

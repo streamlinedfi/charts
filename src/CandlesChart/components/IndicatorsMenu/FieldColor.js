@@ -19,6 +19,7 @@ export default function FieldColor({
       <Text
         $size={13}
         $color={config.theme.indicatorsMenu.labelColor}
+        $mt={0}
         $mb={0.5}
       >
         {label}
@@ -33,7 +34,7 @@ export default function FieldColor({
             $h={24}
             $radius="50%"
             $border={`1.5px solid ${color}`}
-            $background={value === color ? color : undefined}
+            $background={value === color ? color : 'none'}
             $mr={0.5}
             onClick={() => setValue(color)}
           />

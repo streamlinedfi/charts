@@ -17,20 +17,20 @@ function Header({ onTimeframeChange, onSymbolClick }) {
         text: config.symbol.code,
         fontFamily: config.theme.fontFamily,
         fontSize: config.theme.title.fontSize,
-        fontStyle: 500,
+        fontWeight: 500,
       }).getTextWidth()
     : Math.max(
         new Konva.Text({
           text: config.symbol.name,
           fontFamily: config.theme.fontFamily,
           fontSize: config.theme.title.fontSize,
-          fontStyle: 500,
+          fontWeight: 500,
         }).getTextWidth(),
         new Konva.Text({
           text: config.symbol.code,
           fontFamily: config.theme.fontFamily,
           fontSize: config.theme.subtitle.fontSize,
-          fontStyle: 500,
+          fontWeight: 500,
         }).getTextWidth(),
       );
 

@@ -29,7 +29,7 @@ function renderTick({ frame, config, value, x, emphasize }) {
       type: 'Text',
       attrs: {
         fontFamily: config.theme.fontFamily,
-        fontStyle: emphasize ? 600 : config.theme.fontStyle,
+        fontWeight: emphasize ? 600 : config.theme.fontWeight,
         fontSize: config.theme.axes.fontSize,
         fill: emphasize
           ? config.theme.axes.emphasizeColor

@@ -19,6 +19,7 @@ export default function FieldSelect({
       <Text
         $size={13}
         $color={config.theme.indicatorsMenu.labelColor}
+        $mt={0}
         $mb={0.5}
       >
         {label}
