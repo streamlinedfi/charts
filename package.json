@@ -1,6 +1,6 @@
 {
   "name": "@streamlinedfi/charts",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Charting Library with Financial Candlesticks Chart that provides an alternative to TradingView",
   "author": "Streamlined Finance",
   "repository": {
