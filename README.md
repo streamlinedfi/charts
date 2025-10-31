@@ -4,6 +4,12 @@ Charting Library with Financial Candlesticks Chart that provides an alternative 
 
 ![Screenshot of Streamlined Charts](./screenshot2.png)
 
+## Attribution Note
+
+This chart is the one used by [Streamlined Finance](https://www.streamlined.finance). It is free to use, provided that attribution is maintained by keeping the logo visible in the chart.
+
+If you encounter any issues or have suggestions, please [open an issue](https://github.com/streamlinedfi/charts/issues) in the repository.
+
 ## Installation
 
 ```
