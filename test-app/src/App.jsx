@@ -5,8 +5,6 @@ import data from './data';
 
 const { values } = Object;
 
-const decimals = 2;
-
 const defaultRequestBars = 100;
 
 const TimeFrames = {
@@ -74,7 +72,7 @@ function App() {
             name: 'Bitcoin',
             code: 'BTC',
           },
-          decimals: 4,
+          decimals: 2,
           symbolClick: true,
           fullscreen,
           showFullscreenButton: false,
@@ -86,19 +84,9 @@ function App() {
             Hour: [timeframes.H1, timeframes.H4],
             'Day/Week': [timeframes.D1, timeframes.W1],
           },
-          // formatters: {
-          //   axes: {
-          //     x: value => moment(value).format('D MMM'),
-          //     y: value => round(value, decimals),
-          //   },
-          //   crosshair: {
-          //     y: value => round(value, decimals),
-          //   },
-          // },
-          // ...config,
         }}
-        onConfig={setConfig}
         data={data}
+        onConfig={setConfig}
         onTimeframeChange={setTimeframe}
         onLoadMore={() => {
           console.log('load more');

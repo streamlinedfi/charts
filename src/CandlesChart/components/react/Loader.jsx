@@ -1,6 +1,6 @@
 import { Div } from '@streamlinedfi/div';
 import React from 'react';
-import { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const load = keyframes`
   0% {
@@ -10,6 +10,10 @@ const load = keyframes`
   100% {
     transform: translate3d(100%, 0, 0);
   }
+`;
+
+const AnimatedDiv = styled(Div)`
+  animation: ${load} 1s ease infinite;
 `;
 
 export default function Loader({
@@ -35,7 +39,7 @@ export default function Loader({
       {...props}
     >
       <Div $relative $w={small ? 18 : 22} $h={2} $overflow="hidden" $radius={2}>
-        <Div
+        <AnimatedDiv
           $absolute
           $top={0}
           $left={0}
@@ -43,9 +47,6 @@ export default function Loader({
           $h={2}
           $radius={2}
           $background={color}
-          $css={css`
-            animation: ${load} 1s ease infinite;
-          `}
         />
       </Div>
     </Div>

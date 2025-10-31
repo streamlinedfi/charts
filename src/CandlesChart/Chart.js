@@ -1,3 +1,6 @@
+import Konva from 'konva';
+Konva.showWarnings = false;
+
 import { dispatch as d3Dispatch } from 'd3-dispatch';
 import React, { memo, useEffect, useMemo, useRef } from 'react';
 import ChartStyle from './ChartStyle';
