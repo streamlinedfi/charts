@@ -1,5 +1,5 @@
 import React, { forwardRef, lazy, Suspense, useEffect, useState } from 'react';
-import Loader from './components/react/Loader';
+import Loader from './components/Loader';
 
 const Chart = lazy(() => import('./Chart'));
 

@@ -1,5 +1,6 @@
-import { CandlesChart } from '@streamlinedfi/charts';
+import { BarChart, CandlesChart } from '@streamlinedfi/charts';
 import Div from '@streamlinedfi/div';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import data from './data';
 
@@ -62,7 +63,14 @@ function App() {
   }, []);
 
   return (
-    <Div $h="100%" $background={theme => theme.background} $flex $innerCenter>
+    <Div
+      // $h="100%"
+      $p={4}
+      $background={theme => theme.background}
+      $flex
+      $col
+      $innerCenter
+    >
       <CandlesChart
         loading={loading}
         config={{
@@ -95,6 +103,72 @@ function App() {
           alert('symbol clicked!');
         }}
         onFullscreen={setFullscreen}
+      />
+      <Div $mt={4} />
+      <BarChart
+        data={[
+          {
+            name: 'EPS',
+            series: [
+              {
+                x: moment()
+                  .subtract(3, 'day')
+                  .valueOf(),
+                y: 2,
+              },
+              {
+                x: moment()
+                  .subtract(2, 'day')
+                  .valueOf(),
+                y: 3,
+              },
+              {
+                x: moment()
+                  .subtract(1, 'day')
+                  .valueOf(),
+                y: 5,
+              },
+              {
+                x: moment().valueOf(),
+                y: 10,
+              },
+            ],
+          },
+          {
+            name: 'Estimate',
+            series: [
+              {
+                x: moment()
+                  .subtract(3, 'day')
+                  .valueOf(),
+                y: 2,
+              },
+              {
+                x: moment()
+                  .subtract(2, 'day')
+                  .valueOf(),
+                y: 3,
+              },
+              {
+                x: moment()
+                  .subtract(1, 'day')
+                  .valueOf(),
+                y: 5,
+              },
+              {
+                x: moment().valueOf(),
+                y: 10,
+              },
+            ],
+          },
+        ]}
+        config={{
+          title: 'EPS',
+          sharedScale: true,
+          width: 960,
+          height: 560,
+        }}
+        slider
       />
     </Div>
   );

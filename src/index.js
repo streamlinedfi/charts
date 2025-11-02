@@ -1,5 +1,4 @@
+import BarChart from './BarChart';
 import CandlesChart from './CandlesChart';
 
-export default CandlesChart;
-
-export { CandlesChart };
+export { BarChart, CandlesChart };
