@@ -5,7 +5,6 @@ import debounce from 'lodash/debounce';
 import flatMap from 'lodash/flatMap';
 import last from 'lodash/last';
 import reduce from 'lodash/reduce';
-import throttle from 'lodash/throttle';
 import { useEffect, useMemo, useRef } from 'react';
 import getNiceTimeTicks from './getNiceTimeTicks';
 import useContext from './useContext';
@@ -164,13 +163,10 @@ export function useYScaleDispatch() {
     if (data.series) {
       dispatch.call('scale', null, transformer(transformRef.current));
 
-      dispatch.on(
-        'zoomY.yAxis',
-        throttle(transform => {
-          transformRef.current = transform;
-          dispatch.call('scale', null, transformer(transformRef.current));
-        }, 50),
-      );
+      dispatch.on('zoomY.yAxis', transform => {
+        transformRef.current = transform;
+        dispatch.call('scale', null, transformer(transformRef.current));
+      });
     }
   }, [dispatch, key]);
 
