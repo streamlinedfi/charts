@@ -1,10 +1,13 @@
 import Div from '@streamlinedfi/div';
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import OutsideClickHandler from 'react-outside-click-handler';
+import OutsideClickHandlerRaw from 'react-outside-click-handler';
 import useContext from '../../modules/useContext';
 import useSize from '../../modules/useSize';
 import Close from './Close';
+
+const OutsideClickHandler =
+  OutsideClickHandlerRaw?.default ?? OutsideClickHandlerRaw;
 
 export default function Popover({
   children,
