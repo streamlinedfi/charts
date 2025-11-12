@@ -15,6 +15,7 @@ export default defineConfig({
   target: 'es2020',
   outDir: 'dist',
   external: ['react', 'react-dom', 'styled-components'],
+  drop: [],
   loader: {
     '.js': 'jsx',
   },

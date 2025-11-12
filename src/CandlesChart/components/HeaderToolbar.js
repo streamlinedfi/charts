@@ -46,10 +46,11 @@ export default function HeaderToolbar({ onTimeframeChange }) {
       : false;
   const condensedMode = config.width < 472;
 
-  const { x, y, reference, floating, strategy } = useFloating({
+  const { x, y, refs, strategy } = useFloating({
     strategy: 'absolute',
     placement: 'bottom',
   });
+  const { setReference, setFloating } = refs;
 
   const setTool = tool =>
     setConfig({
@@ -341,7 +342,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
             )}
             {!condensedMode && (
               <Div
-                ref={reference}
+                ref={setReference}
                 as="button"
                 $flex
                 $innerCenter
@@ -372,7 +373,7 @@ export default function HeaderToolbar({ onTimeframeChange }) {
             )}
             {config.indicators.showMenu && (
               <IndicatorsMenu
-                floating={floating}
+                floating={setFloating}
                 strategy={strategy}
                 x={x}
                 y={y}
